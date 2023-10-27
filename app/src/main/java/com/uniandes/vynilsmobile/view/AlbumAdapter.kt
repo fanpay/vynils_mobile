@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.uniandes.vynilsmobile.R
 
-class AlbumAdapter (private val albums:List<Album>):RecyclerView.Adapter<AlbumViewHolder>() {
+class AlbumAdapter (private val albums:List<Album>, private val onClickListener:(Album) -> Unit):RecyclerView.Adapter<AlbumViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return AlbumViewHolder(layoutInflater.inflate(R.layout.item_album,parent, false))
@@ -17,7 +17,6 @@ class AlbumAdapter (private val albums:List<Album>):RecyclerView.Adapter<AlbumVi
     }
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
-        val item: String = albums[position].cover
-        holder.bind(item)
+        holder.render(albums[position], onClickListener)
     }
 }

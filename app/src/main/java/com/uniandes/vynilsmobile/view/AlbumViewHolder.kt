@@ -8,8 +8,11 @@ import com.uniandes.vynilsmobile.databinding.ItemAlbumBinding
 class AlbumViewHolder (view: View): RecyclerView.ViewHolder(view) {
 
     private val binding = ItemAlbumBinding.bind(view)
-    fun bind(image:String){
-        Picasso.get().load(image).into(binding.ivAlbum)
+    fun render(album:Album, onClickListener:(Album) -> Unit){
+        Picasso.get().load(album.cover).into(binding.ivAlbum)
+        binding.tvAlbumName.text = album.name
+
+        itemView.setOnClickListener{onClickListener(album)}
 
     }
 }

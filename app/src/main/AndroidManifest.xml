@@ -14,10 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VynilsMobile"
         tools:targetApi="31">
+        <activity
+            android:name=".view.AlbumDetailActivity"
+            android:exported="false" />
+
         <service
             android:name=".view.ApiService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity
             android:name=".view.MainActivity"
