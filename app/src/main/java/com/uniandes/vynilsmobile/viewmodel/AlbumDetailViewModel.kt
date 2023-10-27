@@ -1,4 +1,4 @@
-package com.uniandes.vynilsmobile.view
+package com.uniandes.vynilsmobile.viewmodel
 
 import androidx.lifecycle.ViewModel
 

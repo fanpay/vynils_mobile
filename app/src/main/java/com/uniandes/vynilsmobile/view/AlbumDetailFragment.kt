@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.uniandes.vynilsmobile.R
+import com.uniandes.vynilsmobile.viewmodel.AlbumDetailViewModel
 
 class AlbumDetailFragment : Fragment() {
 

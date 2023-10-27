@@ -1,17 +1,17 @@
 package com.uniandes.vynilsmobile.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.databinding.AlbumFragmentBinding
-import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.view.adapters.AlbumsAdapter
 import com.uniandes.vynilsmobile.viewmodel.AlbumViewModel
 
@@ -51,9 +51,10 @@ class AlbumFragment : Fragment() {
         viewModel.albums.observe(viewLifecycleOwner) { albums ->
             albumAdapter?.albums = albums
         }
-        /*viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
+        viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->
             if (isNetworkError) onNetworkError()
-        })*/
+        }
+
     }
     override fun onDestroyView() {
         super.onDestroyView()
@@ -61,9 +62,9 @@ class AlbumFragment : Fragment() {
     }
 
     private fun onNetworkError() {
-       /* if(!viewModel.isNetworkErrorShown.value!!) {
+       if(!viewModel.isNetworkErrorShown.value!!) {
             Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
-        }*/
+        }
     }
 }

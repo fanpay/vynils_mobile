@@ -5,20 +5,22 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.databinding.AlbumItemBinding
 import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.view.AlbumFragmentDirections
 
-//import com.uniandes.vynilsmobile.view.AlbumFragmentDirections
-
 class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
 
-    var albums :List<Album> = emptyList()
+    private val asyncListDiffer = AsyncListDiffer(this, AlbumDiffCallback())
+
+    var albums: List<Album>
+        get() = asyncListDiffer.currentList
         set(value) {
-            field = value
-            notifyDataSetChanged()
+            asyncListDiffer.submitList(value)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
@@ -31,14 +33,8 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
     }
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
-        holder.viewDataBinding.also {
-            it.album = albums[position]
-        }
-        holder.viewDataBinding.root.setOnClickListener {
-            val action = AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(albums[position].albumId)
-            // Navigate using that action
-            holder.viewDataBinding.root.findNavController().navigate(action)
-        }
+        val album = asyncListDiffer.currentList[position]
+        holder.bind(album)
     }
 
     override fun getItemCount(): Int {
@@ -46,11 +42,27 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
     }
 
 
-    class AlbumViewHolder(val viewDataBinding: AlbumItemBinding) :
+    class AlbumViewHolder(private val viewDataBinding: AlbumItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
         companion object {
             @LayoutRes
             val LAYOUT = R.layout.album_item
+        }
+
+        fun bind(album: Album) {
+            viewDataBinding.album = album
+            viewDataBinding.root.setOnClickListener {
+                val action = AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(album.albumId)
+                viewDataBinding.root.findNavController().navigate(action)
+            }
+        }
+    }
+    private class AlbumDiffCallback : DiffUtil.ItemCallback<Album>() {
+        override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean {
+            return oldItem.albumId == newItem.albumId
+        }
+        override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean {
+            return oldItem == newItem
         }
     }
 }

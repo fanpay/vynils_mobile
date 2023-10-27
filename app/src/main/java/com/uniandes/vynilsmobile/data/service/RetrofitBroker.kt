@@ -4,6 +4,9 @@ import android.util.Log
 import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.data.model.Collector
 import com.uniandes.vynilsmobile.data.model.Comment
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class RetrofitBroker {
@@ -11,22 +14,30 @@ class RetrofitBroker {
     companion object {
 
         // Albums
-        suspend fun getAllAlbums (): List<Album> {
-            val request = ApiClient.albums.getAllAlbums()
-            return if (request.isSuccessful)
-                request.body() ?: listOf()
-            else
-                listOf()
+        suspend fun getAlbums(
+            onComplete: (resp: List<Album>) -> Unit,
+            onError: (error: Throwable) -> Unit
+        ) {
+            try {
+                val response = ApiClient.albums.getAllAlbums()
+                if (response.isSuccessful) {
+                    onComplete(response.body() ?: emptyList())
+                } else {
+                    onError(Exception("Error en la solicitud a la API: ${response.code()}"))
+                }
+            } catch (e: Throwable) {
+                onError(e)
+            }
         }
 
         suspend fun createAlbum(album: Album): Album? {
             val request = ApiClient.albums.createAlbum(album)
-            if (request.isSuccessful){
+            return if (request.isSuccessful){
                 Log.e("SuccessCrearAlbum", request.toString())
-                return request.body()
+                request.body()
             }else{
                 Log.e("ErrorCrearAlbum", request.toString())
-                return null
+                null
             }
         }
 

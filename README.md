@@ -1,1 +1,1 @@
-# vynils_mobile
+# vinyls_mobile
