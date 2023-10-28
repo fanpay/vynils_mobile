@@ -1,10 +1,10 @@
 package com.uniandes.vynilsmobile.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -24,15 +24,17 @@ class AlbumFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: AlbumViewModel
     private var albumAdapter: AlbumsAdapter? = null
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = AlbumFragmentBinding.inflate(inflater, container, false)
-        val view = binding.root
-        albumAdapter = AlbumsAdapter()
-        return view
+
+        progressBar = binding.progressBar
+        albumAdapter = AlbumsAdapter(progressBar)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
