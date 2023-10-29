@@ -32,6 +32,10 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
+    private var _eventNetworkErrorMessage = MutableLiveData<String>()
+    val eventNetworkErrorMessage: LiveData<String>
+        get() = _eventNetworkErrorMessage
+
     init {
         refreshDataFromNetwork()
     }
@@ -45,6 +49,7 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
             }
             catch(e:Exception) {
                 Log.e("Error refreshDataFromNetwork", e.toString())
+                _eventNetworkErrorMessage.value = "Error refreshDataFromNetwork $e"
                 _eventNetworkError.value = true
             }
         }

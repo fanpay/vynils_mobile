@@ -1,5 +1,6 @@
 package com.uniandes.vynilsmobile.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,14 @@ class AlbumFragment : Fragment() {
     private lateinit var viewModel: AlbumViewModel
     private var albumAdapter: AlbumsAdapter? = null
     private lateinit var progressBar: ProgressBar
+    private lateinit var mainActivity: MainActivity
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is MainActivity) {
+            mainActivity = context
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +64,7 @@ class AlbumFragment : Fragment() {
         }
         viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->
             if (isNetworkError) onNetworkError()
+            else  mainActivity.showErrorLayout(false, "")
         }
 
     }
@@ -65,8 +75,9 @@ class AlbumFragment : Fragment() {
 
     private fun onNetworkError() {
        if(!viewModel.isNetworkErrorShown.value!!) {
-            Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
+            Toast.makeText(activity, resources.getString(R.string.error_network_connection), Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
+            mainActivity.showErrorLayout(true, resources.getString(R.string.error_network_connection))
         }
     }
 }

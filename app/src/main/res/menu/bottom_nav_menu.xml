@@ -3,13 +3,13 @@
     <item
         android:id="@+id/page_albumes"
         android:icon="@drawable/ic_baseline_album_24"
-        android:title="Albumes" />
+        android:title="@string/title_albums_bnb" />
     <item
         android:id="@+id/page_artistas"
         android:icon="@drawable/ic_account_music"
-        android:title="Artistas" />
+        android:title="@string/title_artists_bnb" />
     <item
         android:id="@+id/page_coleccionistas"
         android:icon="@drawable/ic_baseline_android_24"
-        android:title="Coleccionistas" />
+        android:title="@string/title_collectors_bnb" />
 </menu>

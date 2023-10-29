@@ -3,7 +3,10 @@ package com.uniandes.vynilsmobile.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -69,5 +72,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    fun showErrorLayout(show: Boolean, text: String) {
+        val splashErrorLayout: ConstraintLayout = findViewById(R.id.splash_error_layout)
+        val splashErrorLayoutErrorText: TextView = findViewById(R.id.textViewError)
+
+        if (show) {
+            splashErrorLayout.visibility = View.VISIBLE
+            splashErrorLayoutErrorText.text = text
+        } else {
+            splashErrorLayout.visibility = View.GONE
+            splashErrorLayoutErrorText.text = text
+        }
     }
 }
