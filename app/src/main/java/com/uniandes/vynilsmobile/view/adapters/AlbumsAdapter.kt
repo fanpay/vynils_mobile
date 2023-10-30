@@ -1,6 +1,5 @@
 package com.uniandes.vynilsmobile.view.adapters
 
-import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +11,8 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.databinding.AlbumItemBinding
 import com.uniandes.vynilsmobile.data.model.Album
@@ -75,20 +71,21 @@ class AlbumsAdapter(private val progressBar: ProgressBar) : RecyclerView.Adapter
         }
 
         fun loadAlbumCover(imageUrl: String) {
-            Glide.with(viewDataBinding.root)
+
+            Picasso.get()
                 .load(imageUrl)
                 .placeholder(R.drawable.ic_baseline_album_24)
                 .error(R.drawable.ic_baseline_android_24)
-                .listener(object : RequestListener<Drawable> {
-                    override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                        Log.e("Glide Error", "Error al cargar la imagen: ${e?.message}")
-                        return false
+                .into(viewDataBinding.imageView1, object : Callback {
+                    override fun onSuccess() {
+                        return
                     }
-                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                        return false
+
+                    override fun onError(e: Exception?) {
+                        Log.e("Picasso Error", "Error al cargar la imagen: ${e?.message}")
+                        return
                     }
                 })
-                .into(viewDataBinding.imageView1)
         }
     }
     private class AlbumDiffCallback : DiffUtil.ItemCallback<Album>() {
