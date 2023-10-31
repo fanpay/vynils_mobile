@@ -13,6 +13,8 @@ class AlbumDetailFragment : Fragment() {
     private var _binding: AlbumDetailFragmentBinding? = null
     private val binding get() = _binding!!
 
+    val album = AlbumDetailFragmentArgs.fromBundle(requireArguments()).album
+
     companion object {
         fun newInstance() = AlbumDetailFragment()
     }
@@ -31,7 +33,7 @@ class AlbumDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(AlbumDetailViewModel::class.java)
-        // TODO: Utiliza el ViewModel según tus necesidades
+        binding.tvDescription.text = album.description
     }
 
     override fun onDestroyView() {

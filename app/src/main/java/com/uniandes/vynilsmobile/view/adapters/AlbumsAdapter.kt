@@ -65,7 +65,7 @@ class AlbumsAdapter(private val progressBar: ProgressBar) : RecyclerView.Adapter
         fun bind(album: Album) {
             viewDataBinding.album = album
             viewDataBinding.root.setOnClickListener {
-                val action = AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(album.albumId)
+                val action = AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(album)
                 viewDataBinding.root.findNavController().navigate(action)
             }
         }

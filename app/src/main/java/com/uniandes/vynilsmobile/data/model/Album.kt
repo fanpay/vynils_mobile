@@ -1,5 +1,7 @@
 package com.uniandes.vynilsmobile.data.model
 
+import java.io.Serializable
+
 data class Album (
     val albumId:Int,
     val name:String,
@@ -8,4 +10,4 @@ data class Album (
     val description:String,
     val genre:String,
     val recordLabel:String
-)
+) : Serializable
