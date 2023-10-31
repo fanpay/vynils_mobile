@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.uniandes.vynilsmobile.R
+import com.uniandes.vynilsmobile.databinding.AlbumDetailFragmentBinding
 import com.uniandes.vynilsmobile.viewmodel.AlbumDetailViewModel
 
 class AlbumDetailFragment : Fragment() {
+    private var _binding: AlbumDetailFragmentBinding? = null
+    private val binding get() = _binding!!
 
     companion object {
         fun newInstance() = AlbumDetailFragment()
@@ -20,14 +22,20 @@ class AlbumDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.album_detail_fragment, container, false)
+    ): View {
+        _binding = AlbumDetailFragmentBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(AlbumDetailViewModel::class.java)
-        // TODO: Use the ViewModel
+        // TODO: Utiliza el ViewModel según tus necesidades
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
