@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.squareup.picasso.Picasso
+import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.databinding.AlbumDetailFragmentBinding
 import com.uniandes.vynilsmobile.viewmodel.AlbumDetailViewModel
 
@@ -33,7 +34,12 @@ class AlbumDetailFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(AlbumDetailViewModel::class.java)
         val args: AlbumDetailFragmentArgs by navArgs()
         binding.albumName.text = args.album.name
-        Picasso.get().load(args.album.cover).into(binding.albumImage)
+        Picasso.get()
+            .load(args.album.cover)
+            .placeholder(R.drawable.ic_baseline_album_24)
+            .error(R.drawable.ic_baseline_android_24)
+            .into(binding.albumImage)
+
         binding.tvDescription.text = args.album.description
         binding.tvReleaseDate.text = args.album.releaseDate
         binding.tvGenre.text = args.album.genre
