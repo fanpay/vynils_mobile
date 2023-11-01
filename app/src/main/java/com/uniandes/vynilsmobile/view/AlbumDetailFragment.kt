@@ -43,6 +43,7 @@ class AlbumDetailFragment : Fragment() {
         binding.tvDescription.text = args.album.description
         binding.tvReleaseDate.text = args.album.releaseDate
         binding.tvGenre.text = args.album.genre
+        binding.btBack.setOnClickListener{requireActivity().onBackPressed()}
     }
 
     override fun onDestroyView() {
