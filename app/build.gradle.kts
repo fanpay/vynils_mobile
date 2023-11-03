@@ -61,14 +61,22 @@ dependencies {
     //implementation("com.github.bumptech.glide:glide:4.13.0")
     implementation("com.squareup.picasso:picasso:2.8")
 
-    testImplementation("junit:junit:4.13.2")
-    debugImplementation("androidx.fragment:fragment-testing:1.1.0-beta01")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
 
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.3.0")
     implementation("com.google.code.gson:gson:2.8.2")
     implementation("com.squareup.retrofit2:converter-gson:2.3.0")
     implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
+
+
+    // Dependencia para Pruebas
+    testImplementation("junit:junit:4.13.2")
+    debugImplementation("androidx.fragment:fragment-testing:1.1.0-beta01")
+    testImplementation("org.mockito:mockito-core:4.0.0")
+
+    // Dependencias de Espresso para pruebas de instrumentación
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
 }

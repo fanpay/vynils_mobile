@@ -26,7 +26,7 @@ class AlbumFragment : Fragment() {
     private lateinit var viewModel: AlbumViewModel
     private var albumAdapter: AlbumsAdapter? = null
     private lateinit var progressBar: ProgressBar
-    private lateinit var mainActivity: MainActivity
+    lateinit var mainActivity: MainActivity
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
