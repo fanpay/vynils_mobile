@@ -13,7 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.databinding.ActivityMainBinding
 
-open class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,7 +74,7 @@ open class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    open fun showErrorLayout(show: Boolean, text: String) {
+    fun showErrorLayout(show: Boolean, text: String) {
         val splashErrorLayout: ConstraintLayout = findViewById(R.id.splash_error_layout)
         val splashErrorLayoutErrorText: TextView = findViewById(R.id.textViewError)
 
