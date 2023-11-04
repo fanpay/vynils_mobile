@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class AlbumViewModel(application: Application) :  AndroidViewModel(application) {
 
-    private val albumsRepository = AlbumRepository(application)
+    var albumsRepository = AlbumRepository(application)
 
     private val _albums = MutableLiveData<List<Album>>()
 
@@ -48,7 +48,7 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
                 _isNetworkErrorShown.postValue(false)
             }
             catch(e:Exception) {
-                Log.e("Error refreshDataFromNetwork", e.toString())
+                Log.e("refreshDataFromNetwork", e.toString())
                 _eventNetworkErrorMessage.value = "Error refreshDataFromNetwork $e"
                 _eventNetworkError.value = true
             }

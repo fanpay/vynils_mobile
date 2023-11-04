@@ -8,7 +8,6 @@ import com.uniandes.vynilsmobile.data.service.RetrofitBroker
 
 class AlbumRepository(val application: Application) {
 
-    //suspend fun getAllAlbums(): List<Album> = RetrofitBroker.getAllAlbums()
     suspend fun getAllAlbums(): List<Album> {
         return try {
             var albums: List<Album> = emptyList()
