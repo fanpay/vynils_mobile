@@ -1,46 +1,36 @@
 package com.uniandes.vynilsmobile.view;
 
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.test.core.app.ActivityScenario;
-import androidx.test.espresso.Espresso;
-import androidx.test.espresso.NoMatchingViewException;
-import androidx.test.espresso.ViewAssertion;
-import androidx.test.espresso.assertion.ViewAssertions;
-import androidx.test.espresso.matcher.ViewMatchers;
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
-import androidx.test.filters.LargeTest;
-import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
-
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import android.os.Handler;
-import android.os.Looper;
-import android.view.View;
-
-import androidx.appcompat.widget.Toolbar;
-
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
-
-import com.uniandes.vynilsmobile.R;
-
 import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isSelected;
-import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
+import android.view.View;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.test.espresso.NoMatchingViewException;
+import androidx.test.espresso.ViewAssertion;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.filters.LargeTest;
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
+
+import com.uniandes.vynilsmobile.R;
+
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.hamcrest.TypeSafeMatcher;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 @LargeTest
 @RunWith(AndroidJUnit4ClassRunner.class)

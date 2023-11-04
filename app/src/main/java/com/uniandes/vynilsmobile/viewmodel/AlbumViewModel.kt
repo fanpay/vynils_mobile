@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class AlbumViewModel(application: Application) :  AndroidViewModel(application) {
 
-    private val albumsRepository = AlbumRepository(application)
+    var albumsRepository = AlbumRepository(application)
 
     private val _albums = MutableLiveData<List<Album>>()
 
