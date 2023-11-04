@@ -27,6 +27,9 @@ Puede encontrar más información sobre el proyecto en la wiki
 Cada archivo de esta ubicación representa un escenario de pruebas 
 2. Hacer click derecho en cada archivo de pruebas
 3. Hacer click en **Run 'NombreArchivo'**
+4. Finalmente se puede visualizar la ejecución exitosa de las pruebas como la siguiente imagen:
+    <img width="500" alt="image" src="https://github.com/fanpay/vynils_mobile/assets/20799651/91011c58-0466-4c63-ae89-b43a4ced13a3">
+
 
 ## Ver release asociado a una versión.
 Para visualizar el release asociado a una versión debe dar click en la lista de branches y seleccionar `Tags`. De esta manera puede visualizar los cambios correspondientes a la iteración. Note que en la parte derecha se encuentra la relación de la versión al release.
