@@ -14,8 +14,8 @@ Puede encontrar más información sobre el proyecto en la wiki
 5. Sincronizar el archivo build.gradle para configurar las versiones de los sistemas de su máquina
 6. Ejecutar la aplicación mediante alguna de las siguientes formas:
     1. **Ejecución en un celular:** Descargue en su celular el archivo `app-debug.apk` e instálelo . Una vez instalado, asegurese de tener conexión a internet para ejecutar la aplicación. Puede encontrar el archivo en las siguientes ubicaciones:
-        1. En el repositorio: **ruta_apk**
-        2. El el siguiente enlace: [app-debug.apk]()
+        1. En el repositorio: `release_apk/app-debug.apk`
+        2. El el siguiente enlace: [app-debug.apk](https://uniandes-my.sharepoint.com/:u:/g/personal/s_mascareno_uniandes_edu_co/EZCnY8VKN3JEgIXjqnT6rjMBbVOF1iJB8L6R9MeZGHhGmg?e=p8gMOv)
     2. **Ejecución en el emulador de Android Studio:** Puede ejecutar la aplicación desde un emulador Android desde Android Studio. Solo debe crearlo, seleccionarlo y ejecutarlo.
        * [Instrucciones](https://developer.android.com/studio/install?hl=es-419)
     4. **Emulación de la aplicación en un celular:** Puede usar su dispositivo Android como emulador y ejecutar la aplicación desde su máquina.
@@ -29,4 +29,4 @@ Cada archivo de esta ubicación representa un escenario de pruebas
 3. Hacer click en **Run 'NombreArchivo'**
 
 ## Ver release asociado a una versión.
-Para visualizar el release asociado a una versión debe dar click en la lista de branches y seleccionar `Tags`, de esta manera puede visualizar los cambios correspondientes a la iteración, note que en la parte derecha se encuentra la relacion de la versión al release, aca se puede evidenciar de mejor manera.
+Para visualizar el release asociado a una versión debe dar click en la lista de branches y seleccionar `Tags`. De esta manera puede visualizar los cambios correspondientes a la iteración. Note que en la parte derecha se encuentra la relación de la versión al release.
