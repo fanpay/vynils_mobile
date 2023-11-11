@@ -1,7 +1,6 @@
 package com.uniandes.vynilsmobile.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -30,25 +29,6 @@ class CommentViewModel(application: Application, albumId: Int) :  AndroidViewMod
         get() = _isNetworkErrorShown
 
     val id:Int = albumId
-
-    /*init {
-        refreshDataFromNetwork()
-    }
-
-    private fun refreshDataFromNetwork() {
-        commentsRepository.refreshData(id, {
-            _comments.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-        },{
-            Log.d("Error", it.toString())
-            _eventNetworkError.value = true
-        })
-    }
-
-    fun onNetworkErrorShown() {
-        _isNetworkErrorShown.value = true
-    }*/
 
     class Factory(val app: Application, val albumId: Int) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
