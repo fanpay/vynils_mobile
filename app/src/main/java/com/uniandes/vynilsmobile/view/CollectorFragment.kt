@@ -47,11 +47,11 @@ class CollectorFragment : Fragment() {
         }
         activity.actionBar?.title = getString(R.string.title_collectors)
         viewModel = ViewModelProvider(this, CollectorViewModel.Factory(activity.application))[CollectorViewModel::class.java]
-        viewModel.collectors.observe(viewLifecycleOwner, Observer<List<Collector>> {
+        viewModel.collectors.observe(viewLifecycleOwner) {
             it.apply {
                 viewModelAdapter!!.collectors = this
             }
-        })
+        }
     }
     override fun onDestroyView() {
         super.onDestroyView()
