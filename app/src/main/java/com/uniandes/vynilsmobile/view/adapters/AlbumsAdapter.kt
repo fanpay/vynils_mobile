@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
+import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.data.model.Album
@@ -44,8 +45,6 @@ class AlbumsAdapter(private val progressBar: ProgressBar, private val onItemClic
         } else {
             progressBar.visibility = View.VISIBLE
         }
-
-        holder.loadAlbumCover(album.cover)
     }
 
     override fun getItemCount(): Int {
@@ -65,20 +64,21 @@ class AlbumsAdapter(private val progressBar: ProgressBar, private val onItemClic
             viewDataBinding.root.setOnClickListener {
                 onItemClick(album)
             }
+            loadAlbumCover(album.cover)
         }
 
-        fun loadAlbumCover(imageUrl: String) {
+        private fun loadAlbumCover(imageUrl: String) {
             Picasso.get()
                 .load(imageUrl)
                 .placeholder(R.drawable.ic_baseline_album_24)
                 .error(R.drawable.ic_baseline_android_24)
                 .fit()
                 .centerCrop()
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .into(viewDataBinding.imageView1, object : Callback {
                     override fun onSuccess() {
                         return
                     }
-
                     override fun onError(e: Exception?) {
                         Log.e("Picasso Error", "Error al cargar la imagen: ${e?.message}")
                         return
