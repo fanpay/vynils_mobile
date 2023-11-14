@@ -25,6 +25,7 @@
 
     <string name="error_network_connection">Error de comunicación</string>
     <string name="error_retrieve_albums">Error obteniendo álbumes</string>
+    <string name="error_retrieve_bands">Error obteniendo bandas</string>
 
 
 </resources>
