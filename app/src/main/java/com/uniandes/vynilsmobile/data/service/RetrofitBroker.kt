@@ -2,6 +2,7 @@ package com.uniandes.vynilsmobile.data.service
 
 import android.util.Log
 import com.uniandes.vynilsmobile.data.model.Album
+import com.uniandes.vynilsmobile.data.model.Artist
 import com.uniandes.vynilsmobile.data.model.Band
 import com.uniandes.vynilsmobile.data.model.Collector
 import com.uniandes.vynilsmobile.data.model.Comment
@@ -62,6 +63,34 @@ class RetrofitBroker {
                 request.body()
             } else {
                 Log.e("ErrorCrearBand", request.toString())
+                null
+            }
+        }
+
+        // Artists
+        suspend fun getArtists(
+            onComplete: (resp: List<Artist>) -> Unit,
+            onError: (error: Throwable) -> Unit
+        ) {
+            try {
+                val response = ApiClient.artists.getAllArtists()
+                if (response.isSuccessful) {
+                    onComplete(response.body() ?: emptyList())
+                } else {
+                    onError(Exception("Error en la solicitud a la API: ${response.code()}"))
+                }
+            } catch (e: Throwable) {
+                onError(e)
+            }
+        }
+
+        suspend fun createArtist(artist: Artist): Artist? {
+            val request = ApiClient.artists.createArtist(artist)
+            return if (request.isSuccessful) {
+                Log.e("SuccessCrearArtist", request.toString())
+                request.body()
+            } else {
+                Log.e("ErrorCrearArtist", request.toString())
                 null
             }
         }

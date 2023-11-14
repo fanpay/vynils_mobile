@@ -5,7 +5,7 @@
         android:icon="@drawable/ic_baseline_album_24"
         android:title="@string/title_albums_bnb" />
     <item
-        android:id="@+id/page_artistas"
+        android:id="@+id/artistFragment"
         android:icon="@drawable/ic_account_music"
         android:title="@string/title_artists_bnb" />
     <item

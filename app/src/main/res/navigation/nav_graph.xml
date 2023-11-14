@@ -22,4 +22,10 @@
             android:name="album"
             app:argType="com.uniandes.vynilsmobile.data.model.Album" />
     </fragment>
+    <fragment
+        android:id="@+id/artistFragment"
+        android:name="com.uniandes.vynilsmobile.view.ArtistFragment"
+        android:label="artist_fragment"
+        tools:layout="@layout/artist_fragment" >
+    </fragment>
 </navigation>

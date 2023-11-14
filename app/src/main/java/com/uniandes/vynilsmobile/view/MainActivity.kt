@@ -1,6 +1,7 @@
 package com.uniandes.vynilsmobile.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -52,16 +53,10 @@ class MainActivity : AppCompatActivity() {
                 supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                 true
             }
-            R.id.page_artistas -> {
-                val builder = AlertDialog.Builder(this)
-                builder.setTitle("Función no implementada")
-                builder.setMessage("Esta función aún no está implementada")
-                builder.setPositiveButton("Aceptar") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                val dialog = builder.create()
-                dialog.show()
-                false
+            R.id.artistFragment -> {
+                Log.d("Test", "Entre a artist")
+                navController.navigate(R.id.artistFragment)
+                true
             }
             R.id.page_coleccionistas -> {
                 val builder = AlertDialog.Builder(this)
