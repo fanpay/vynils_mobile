@@ -1,15 +1,23 @@
+package com.uniandes.vynilsmobile.view
+
 import android.os.Bundle
+import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
-import com.uniandes.vynilsmobile.data.model.Album
-import com.uniandes.vynilsmobile.view.AlbumDetailFragment
-import org.junit.Test
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.uniandes.vynilsmobile.R
+import com.uniandes.vynilsmobile.data.model.Album
+import org.junit.Rule
+import org.junit.Test
 
 class AlbumDetailFragmentTest {
+
+    @Rule
+    @JvmField
+    var mActivityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
+
 
     private val album = Album(
         albumId = 1,
@@ -23,13 +31,13 @@ class AlbumDetailFragmentTest {
 
     @Test
     fun testAlbumDetailFragmentUI() {
-
-        // Launch the fragment with the given album as an argument
-        val scenario = launchFragmentInContainer(
+        // Lanzar el fragmento en un escenario de fragmento
+        val scenario: FragmentScenario<AlbumDetailFragment> = launchFragmentInContainer(
             fragmentArgs = Bundle().apply {
                 putSerializable("album", album)
-            }
-        ) { AlbumDetailFragment() }
+            },
+            themeResId = R.style.Theme_VynilsMobile
+        )
 
         // Verify that the views are displayed correctly
         Espresso.onView(ViewMatchers.withId(R.id.albumName))
@@ -48,7 +56,6 @@ class AlbumDetailFragmentTest {
             .check(ViewAssertions.matches(ViewMatchers.withText(album.genre)))
 
         // Perform click action on the Back button
-        Espresso.onView(ViewMatchers.withId(R.id.btBack))
-            .perform(ViewActions.click())
+        Espresso.pressBack()
     }
 }

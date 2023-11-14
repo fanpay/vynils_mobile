@@ -58,7 +58,7 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("com.squareup.picasso:picasso:2.8")
+    implementation("com.squareup.picasso:picasso:2.71828")
 
 
 
@@ -67,6 +67,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.8.2")
     implementation("com.squareup.retrofit2:converter-gson:2.3.0")
     implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
 
 
     // Dependencia para Pruebas

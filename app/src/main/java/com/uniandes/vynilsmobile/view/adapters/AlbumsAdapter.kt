@@ -7,18 +7,16 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.uniandes.vynilsmobile.R
-import com.uniandes.vynilsmobile.databinding.AlbumItemBinding
 import com.uniandes.vynilsmobile.data.model.Album
-import com.uniandes.vynilsmobile.view.AlbumFragmentDirections
+import com.uniandes.vynilsmobile.databinding.AlbumItemBinding
 
-class AlbumsAdapter(private val progressBar: ProgressBar) : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
+class AlbumsAdapter(private val progressBar: ProgressBar, private val onItemClick: (Album) -> Unit) : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
 
     private val asyncListDiffer = AsyncListDiffer(this, AlbumDiffCallback())
 
@@ -39,7 +37,7 @@ class AlbumsAdapter(private val progressBar: ProgressBar) : RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
         val album = asyncListDiffer.currentList[position]
-        holder.bind(album)
+        holder.bind(album, onItemClick)
 
         if (itemCount > 0) {
             progressBar.visibility = View.GONE
@@ -62,20 +60,20 @@ class AlbumsAdapter(private val progressBar: ProgressBar) : RecyclerView.Adapter
             val LAYOUT = R.layout.album_item
         }
 
-        fun bind(album: Album) {
+        fun bind(album: Album, onItemClick: (Album) -> Unit) {
             viewDataBinding.album = album
             viewDataBinding.root.setOnClickListener {
-                val action = AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(album)
-                viewDataBinding.root.findNavController().navigate(action)
+                onItemClick(album)
             }
         }
 
         fun loadAlbumCover(imageUrl: String) {
-
             Picasso.get()
                 .load(imageUrl)
                 .placeholder(R.drawable.ic_baseline_album_24)
                 .error(R.drawable.ic_baseline_android_24)
+                .fit()
+                .centerCrop()
                 .into(viewDataBinding.imageView1, object : Callback {
                     override fun onSuccess() {
                         return

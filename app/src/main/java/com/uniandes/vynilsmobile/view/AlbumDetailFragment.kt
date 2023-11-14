@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.navArgs
 import com.squareup.picasso.Picasso
 import com.uniandes.vynilsmobile.R
@@ -18,6 +19,10 @@ class AlbumDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = AlbumDetailFragmentBinding.inflate(inflater, container, false)
+
+        val bar = (activity as? AppCompatActivity)?.supportActionBar
+        bar?.title = getString(R.string.title_detail_album)
+
         return binding.root
     }
 
@@ -35,7 +40,6 @@ class AlbumDetailFragment : Fragment() {
         binding.tvDescription.text = args.album.description
         binding.tvReleaseDate.text = args.album.releaseDate
         binding.tvGenre.text = args.album.genre
-        binding.btBack.setOnClickListener{requireActivity().onBackPressed()}
     }
 
     override fun onDestroyView() {

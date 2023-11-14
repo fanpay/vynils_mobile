@@ -7,11 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.uniandes.vynilsmobile.R
+import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.databinding.AlbumFragmentBinding
 import com.uniandes.vynilsmobile.view.adapters.AlbumsAdapter
 import com.uniandes.vynilsmobile.viewmodel.AlbumViewModel
@@ -19,7 +22,7 @@ import com.uniandes.vynilsmobile.viewmodel.AlbumViewModel
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class AlbumFragment : Fragment() {
+class AlbumFragment : Fragment(R.layout.album_fragment) {
     private var _binding: AlbumFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
@@ -41,14 +44,24 @@ class AlbumFragment : Fragment() {
     ): View? {
         _binding = AlbumFragmentBinding.inflate(inflater, container, false)
 
+        val bar = (activity as AppCompatActivity).supportActionBar
+        bar?.title = getString(R.string.title_albums)
+
         progressBar = binding.progressBar
-        albumAdapter = AlbumsAdapter(progressBar)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         recyclerView = binding.albumsRv
         recyclerView.layoutManager = LinearLayoutManager(context)
+
+        val onItemClick: (Album) -> Unit = { album ->
+            val action = AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(album)
+            findNavController().navigate(action)
+        }
+
+        albumAdapter = AlbumsAdapter(progressBar, onItemClick)
         recyclerView.adapter = albumAdapter
     }
 

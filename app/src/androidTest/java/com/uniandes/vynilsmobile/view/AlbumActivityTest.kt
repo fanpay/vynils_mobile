@@ -29,12 +29,12 @@ class AlbumActivityTest {
 
     @Before
     fun navigateToAlbumFragmentFromBottomNavigationMenu(){
-        Thread.sleep(500)
+        Thread.sleep(300)
 
         val bottomNavigationItemView = onView(
             allOf(
-                withId(R.id.page_albumes),
-                withContentDescription("Albumes"),
+                withId(R.id.albumFragment),
+                withContentDescription(R.string.title_albums),
                 isDescendantOfA(
                     isDescendantOfA(withId(R.id.bottom_navigation))
                 ),

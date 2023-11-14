@@ -11,6 +11,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isSelected;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.widget.Toolbar;
@@ -41,7 +42,7 @@ public class TestMainActivity{
 
     @Test
     public void testToolbarTitle() {
-        String expectedTitle = getApplicationContext().getResources().getString(R.string.app_name);
+        String expectedTitle = getApplicationContext().getResources().getString(R.string.title_albums);
         onView(withId(R.id.my_toolbar)).check(matches(isDisplayed()));
         onView(isAssignableFrom(Toolbar.class))
                 .check(matches(withToolbarTitle(expectedTitle)));
@@ -53,7 +54,9 @@ public class TestMainActivity{
             protected boolean matchesSafely(View item) {
                 if (item instanceof Toolbar) {
                     Toolbar toolbar = (Toolbar) item;
-                    return expectedTitle.equals(toolbar.getTitle());
+                    String actualTitle = String.valueOf(toolbar.getTitle());
+                    Log.d("ToolbarTest", "Actual title: " + actualTitle);
+                    return expectedTitle.equals(actualTitle);
                 }
                 return false;
             }
@@ -70,7 +73,7 @@ public class TestMainActivity{
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()));
 
         String expectedTitleAlbums = getApplicationContext().getResources().getString(R.string.title_albums_bnb);
-        onView(withId(R.id.page_albumes)).check(matches(isDisplayed()));
+        onView(withId(R.id.albumFragment)).check(matches(isDisplayed()));
         onView(withId(R.id.bottom_navigation))
                 .check(matches(hasDescendant(withText(expectedTitleAlbums))));
 
@@ -84,7 +87,7 @@ public class TestMainActivity{
         onView(withId(R.id.bottom_navigation))
                 .check(matches(hasDescendant(withText(expectedTitleCollectors))));
 
-        onView(withId(R.id.page_albumes)).perform(click());
+        onView(withId(R.id.albumFragment)).perform(click());
         onView(withId(R.id.albumsRv)).check(matches(isDisplayed()));
     }
 
@@ -92,9 +95,9 @@ public class TestMainActivity{
     public void testAlbumsNavigationFromBottomNavigationBar() {
         onView(withId(R.id.bottom_navigation)).check(matches(isDisplayed()));
 
-        onView(withId(R.id.page_albumes)).check(matches(isDisplayed()));
-        onView(withId(R.id.page_albumes)).perform(click());
-        onView(withId(R.id.page_albumes)). check(matches(isSelected()));
+        onView(withId(R.id.albumFragment)).check(matches(isDisplayed()));
+        onView(withId(R.id.albumFragment)).perform(click());
+        onView(withId(R.id.albumFragment)). check(matches(isSelected()));
 
         onView(withId(R.id.albumsRv)).check(matches(isDisplayed()));
     }
