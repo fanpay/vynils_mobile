@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.artistFragment -> {
-                Log.d("Test", "Entre a artist")
                 navController.navigate(R.id.artistFragment)
                 true
             }

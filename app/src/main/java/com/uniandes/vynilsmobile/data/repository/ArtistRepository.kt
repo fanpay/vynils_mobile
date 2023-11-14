@@ -1,17 +1,14 @@
 package com.uniandes.vynilsmobile.data.repository
 
 import android.app.Application
-import android.util.Log
 import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.data.exceptions.ApiRequestException
-import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.data.model.Artist
 import com.uniandes.vynilsmobile.data.service.RetrofitBroker
 
 class ArtistRepository(val application: Application) {
 
     suspend fun getAllArtists(): List<Artist> {
-        Log.d("Etiqueta", "Llamando al API")
         return try {
             var artists: List<Artist> = emptyList()
             RetrofitBroker.getArtists(

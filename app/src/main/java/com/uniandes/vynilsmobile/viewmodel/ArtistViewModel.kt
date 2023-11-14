@@ -8,9 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.data.model.Artist
-import com.uniandes.vynilsmobile.data.repository.AlbumRepository
 import com.uniandes.vynilsmobile.data.repository.ArtistRepository
 import kotlinx.coroutines.launch
 

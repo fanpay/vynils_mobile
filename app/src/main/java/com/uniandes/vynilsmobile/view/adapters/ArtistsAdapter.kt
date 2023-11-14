@@ -13,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.uniandes.vynilsmobile.R
-import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.data.model.Artist
-import com.uniandes.vynilsmobile.databinding.AlbumItemBinding
 import com.uniandes.vynilsmobile.databinding.ArtistItemBinding
 
 class ArtistsAdapter(private val progressBar: ProgressBar, private val onItemClick: (Artist) -> Unit) : RecyclerView.Adapter<ArtistsAdapter.ArtistViewHolder>(){
