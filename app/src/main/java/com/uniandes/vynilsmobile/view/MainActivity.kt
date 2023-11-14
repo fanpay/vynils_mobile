@@ -1,17 +1,18 @@
 package com.uniandes.vynilsmobile.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -28,50 +29,54 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         // Make sure actions in the ActionBar get propagated to the NavController
-        Log.d("act", navController.toString())
-        setSupportActionBar(findViewById(R.id.my_toolbar))
-        //setupActionBarWithNavController(navController)
+        setSupportActionBar(findViewById(com.uniandes.vynilsmobile.R.id.my_toolbar))
+        setupActionBarWithNavController(navController)
 
-
-        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
-
-        bottomNavigationView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.page_albumes -> {
-                    navController.navigate(R.id.albumFragment)
-                    true
-                }
-                R.id.page_artistas -> {
-                    //navController.navigate(R.id.albumDetailFragment)
-                    val builder = AlertDialog.Builder(this)
-                    builder.setTitle("Función no implementada")
-                    builder.setMessage("Esta función aún no está implementada")
-                    builder.setPositiveButton("Aceptar") { dialog, _ ->
-                        dialog.dismiss()
-                    }
-                    val dialog = builder.create()
-                    dialog.show()
-                    false
-                }
-                R.id.page_coleccionistas -> {
-                    val builder = AlertDialog.Builder(this)
-                    builder.setTitle("Función no implementada")
-                    builder.setMessage("Esta función aún no está implementada")
-                    builder.setPositiveButton("Aceptar") { dialog, _ ->
-                        dialog.dismiss()
-                    }
-                    val dialog = builder.create()
-                    dialog.show()
-                    false
-                }
-                // Handle other menu items similarly
-                else -> false
-            }
+        binding.bottomNavigation.setOnItemSelectedListener {
+            handleBottomNavigation(
+                it.itemId
+            )
         }
-    }
+        binding.bottomNavigation.selectedItemId = R.id.albumFragment
 
+        setContentView(binding.root)
+    }
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    private fun handleBottomNavigation(menuItemId: Int): Boolean {
+        return when (menuItemId) {
+            R.id.albumFragment -> {
+                // Limpiar el back stack antes de navegar al fragmento de álbumes
+                supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                true
+            }
+            R.id.page_artistas -> {
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Función no implementada")
+                builder.setMessage("Esta función aún no está implementada")
+                builder.setPositiveButton("Aceptar") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                val dialog = builder.create()
+                dialog.show()
+                false
+            }
+            R.id.page_coleccionistas -> {
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Función no implementada")
+                builder.setMessage("Esta función aún no está implementada")
+                builder.setPositiveButton("Aceptar") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                val dialog = builder.create()
+                dialog.show()
+                false
+            }
+            // Handle other menu items similarly
+            else -> false
+        }
     }
 
     fun showErrorLayout(show: Boolean, text: String) {
