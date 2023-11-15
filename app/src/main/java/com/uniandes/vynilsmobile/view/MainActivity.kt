@@ -49,24 +49,16 @@ class MainActivity : AppCompatActivity() {
     private fun handleBottomNavigation(menuItemId: Int): Boolean {
         return when (menuItemId) {
             R.id.albumFragment -> {
-                // Limpiar el back stack antes de navegar al fragmento de álbumes
-                supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                navController.navigate(R.id.albumFragment)
                 true
             }
             R.id.artistFragment -> {
                 navController.navigate(R.id.artistFragment)
                 true
             }
-            R.id.page_coleccionistas -> {
-                val builder = AlertDialog.Builder(this)
-                builder.setTitle("Función no implementada")
-                builder.setMessage("Esta función aún no está implementada")
-                builder.setPositiveButton("Aceptar") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                val dialog = builder.create()
-                dialog.show()
-                false
+            R.id.collectorsFragment -> {
+                navController.navigate(R.id.collectorsFragment)
+                true
             }
             // Handle other menu items similarly
             else -> false
