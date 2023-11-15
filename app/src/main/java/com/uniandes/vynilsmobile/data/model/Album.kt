@@ -1,9 +1,12 @@
 package com.uniandes.vynilsmobile.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
+@Entity(tableName = "albums_table")
 data class Album (
-    val albumId:Int,
+    @PrimaryKey val albumId:Int,
     val name:String,
     val cover:String,
     val releaseDate:String,

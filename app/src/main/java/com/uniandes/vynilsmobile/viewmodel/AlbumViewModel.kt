@@ -8,14 +8,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.uniandes.vynilsmobile.data.database.VinylRoomDatabase
 import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.data.repository.AlbumRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class AlbumViewModel(application: Application) :  AndroidViewModel(application) {
 
-    var albumsRepository = AlbumRepository(application)
+    var albumsRepository = AlbumRepository(application, VinylRoomDatabase.getDatabase(application.applicationContext).albumsDao())
 
     private val _albums = MutableLiveData<List<Album>>()
 
@@ -41,17 +44,21 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
     }
 
     private fun refreshDataFromNetwork() {
-        viewModelScope.launch {
-            try {
-                _albums.value = albumsRepository.getAllAlbums()
+        viewModelScope.launch (Dispatchers.Default){
+            try{
+                withContext(Dispatchers.IO){
+                    val data = albumsRepository.getAllAlbums()
+                    _albums.postValue(data)
+                }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
             }
-            catch(e:Exception) {
+            catch (e:Exception){
                 Log.e("refreshDataFromNetwork", e.toString())
                 _eventNetworkErrorMessage.value = "Error refreshDataFromNetwork $e"
                 _eventNetworkError.value = true
             }
+
         }
     }
 

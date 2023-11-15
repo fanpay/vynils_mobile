@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.annotation.LayoutRes
+import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.data.model.Album
@@ -39,13 +42,7 @@ class AlbumsAdapter(private val progressBar: ProgressBar, private val onItemClic
         val album = asyncListDiffer.currentList[position]
         holder.bind(album, onItemClick)
 
-        if (itemCount > 0) {
-            progressBar.visibility = View.GONE
-        } else {
-            progressBar.visibility = View.VISIBLE
-        }
-
-        holder.loadAlbumCover(album.cover)
+        progressBar.visibility = if(itemCount > 0) View.GONE else View.VISIBLE
     }
 
     override fun getItemCount(): Int {
@@ -65,22 +62,40 @@ class AlbumsAdapter(private val progressBar: ProgressBar, private val onItemClic
             viewDataBinding.root.setOnClickListener {
                 onItemClick(album)
             }
+            loadAlbumCover(album.cover)
         }
 
-        fun loadAlbumCover(imageUrl: String) {
+        private fun loadAlbumCover(imageUrl: String) {
             Picasso.get()
-                .load(imageUrl)
+                .load(imageUrl.toUri())
                 .placeholder(R.drawable.ic_baseline_album_24)
                 .error(R.drawable.ic_baseline_android_24)
                 .fit()
                 .centerCrop()
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .into(viewDataBinding.imageView1, object : Callback {
                     override fun onSuccess() {
                         return
                     }
-
                     override fun onError(e: Exception?) {
-                        Log.e("Picasso Error", "Error al cargar la imagen: ${e?.message}")
+                        Picasso.get()
+                            .load(imageUrl)
+                            .placeholder(R.drawable.ic_baseline_album_24)
+                            .error(R.drawable.ic_baseline_android_24)
+                            .fit()
+                            .centerCrop()
+                            .memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
+                            .networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE)
+                            .into(viewDataBinding.imageView1, object : Callback {
+                                override fun onSuccess() {
+                                    return
+                                }
+                                override fun onError(e: Exception?) {
+                                    Log.e("Picasso Error", "Error al cargar la imagen: ${e?.message}")
+                                    viewDataBinding.imageView1.setImageResource(R.drawable.ic_baseline_android_24)
+                                    e?.printStackTrace()
+                                }
+                            })
                         return
                     }
                 })
