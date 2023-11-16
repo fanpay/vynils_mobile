@@ -35,9 +35,15 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
-    private var _eventNetworkErrorMessage = MutableLiveData<String>()
-    val eventNetworkErrorMessage: LiveData<String>
-        get() = _eventNetworkErrorMessage
+    private var _eventNotDataFound = MutableLiveData(false)
+
+    val eventNotDataFound: LiveData<Boolean>
+        get() = _eventNotDataFound
+
+    private var _isNotDataFoundShown = MutableLiveData(false)
+
+    val isNotDataFoundShown: LiveData<Boolean>
+        get() = _isNotDataFoundShown
 
     init {
         val albumDao = VinylRoomDatabase.getDatabase(application).albumsDao()
@@ -51,21 +57,34 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
                 withContext(Dispatchers.Main){
                     val data = albumsRepository.getAllAlbums()
                     _albums.value = data
+
+                    if(data.isEmpty()){
+                        _eventNotDataFound.postValue(true)
+                        _isNotDataFoundShown.postValue(true)
+                    }
+                    else{
+                        _eventNotDataFound.postValue(false)
+                        _isNotDataFoundShown.postValue(false)
+                    }
                 }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
             }
             catch (e:Exception){
                 Log.e("refreshDataFromNetwork", e.toString())
-                _eventNetworkErrorMessage.postValue("Error refreshDataFromNetwork $e")
                 _eventNetworkError.postValue(true)
+
+                _eventNotDataFound.postValue(false)
+                _isNotDataFoundShown.postValue(false)
             }
 
         }
     }
-
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
+    }
+    fun onNotDataFoundShown() {
+        _isNotDataFoundShown.value = true
     }
 
     class Factory(val app: Application) : ViewModelProvider.Factory {

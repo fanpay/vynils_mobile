@@ -25,7 +25,8 @@ abstract class VinylRoomDatabase : RoomDatabase() {
 
         private const val DATABASE_NAME = "vinyls_database"
 
-        fun getDatabase(context: Context): VinylRoomDatabase{
+        fun getDatabase(context: Context
+        ): VinylRoomDatabase{
             val tempInstance = INSTANCE
 
             if (tempInstance != null) {
@@ -36,7 +37,10 @@ abstract class VinylRoomDatabase : RoomDatabase() {
                     context.applicationContext,
                     VinylRoomDatabase::class.java,
                     DATABASE_NAME
-                ).build()
+                )
+                // Wipes and rebuilds instead of migrating if no Migration object.
+                .fallbackToDestructiveMigration()
+                .build()
                 INSTANCE = instance
                 return instance
             }
