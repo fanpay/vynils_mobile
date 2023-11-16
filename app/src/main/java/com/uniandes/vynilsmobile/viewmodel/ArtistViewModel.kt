@@ -8,20 +8,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.uniandes.vynilsmobile.data.model.Album
-import com.uniandes.vynilsmobile.data.model.Collector
-import com.uniandes.vynilsmobile.data.repository.AlbumRepository
-import com.uniandes.vynilsmobile.data.repository.CollectorRepository
+import com.uniandes.vynilsmobile.data.model.Artist
+import com.uniandes.vynilsmobile.data.repository.ArtistRepository
 import kotlinx.coroutines.launch
 
 
-class CollectorViewModel(application: Application) :  AndroidViewModel(application) {
-    var collectorsRepository = CollectorRepository(application)
+class ArtistViewModel(application: Application) :  AndroidViewModel(application) {
 
-    private val _collectors = MutableLiveData<List<Collector>>()
+    var artistsRepository = ArtistRepository(application)
 
-    val collectors: LiveData<List<Collector>>
-        get() = _collectors
+    private val _artists = MutableLiveData<List<Artist>>()
+
+    val artists: LiveData<List<Artist>>
+        get() = _artists
 
     private var _eventNetworkError = MutableLiveData(false)
 
@@ -44,7 +43,7 @@ class CollectorViewModel(application: Application) :  AndroidViewModel(applicati
     private fun refreshDataFromNetwork() {
         viewModelScope.launch {
             try {
-                _collectors.value = collectorsRepository.getAllCollectors()
+                _artists.value = artistsRepository.getAllArtists()
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
             }
@@ -61,10 +60,10 @@ class CollectorViewModel(application: Application) :  AndroidViewModel(applicati
     }
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(CollectorViewModel::class.java)) {
+         override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(ArtistViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return CollectorViewModel(app) as T
+                return ArtistViewModel(app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

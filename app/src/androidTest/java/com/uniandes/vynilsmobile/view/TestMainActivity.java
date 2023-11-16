@@ -78,12 +78,12 @@ public class TestMainActivity{
                 .check(matches(hasDescendant(withText(expectedTitleAlbums))));
 
         String expectedTitleArtists = getApplicationContext().getResources().getString(R.string.title_artists_bnb);
-        onView(withId(R.id.page_artistas)).check(matches(isDisplayed()));
+        onView(withId(R.id.artistFragment)).check(matches(isDisplayed()));
         onView(withId(R.id.bottom_navigation))
                 .check(matches(hasDescendant(withText(expectedTitleArtists))));
 
         String expectedTitleCollectors = getApplicationContext().getResources().getString(R.string.title_collectors_bnb);
-        onView(withId(R.id.page_coleccionistas)).check(matches(isDisplayed()));
+        onView(withId(R.id.collectorsFragment)).check(matches(isDisplayed()));
         onView(withId(R.id.bottom_navigation))
                 .check(matches(hasDescendant(withText(expectedTitleCollectors))));
 
