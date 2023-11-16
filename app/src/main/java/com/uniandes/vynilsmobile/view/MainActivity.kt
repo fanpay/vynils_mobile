@@ -10,7 +10,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.squareup.picasso.Picasso
 import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.databinding.ActivityMainBinding
 
@@ -18,19 +17,9 @@ import com.uniandes.vynilsmobile.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
-    private fun initPicasso(){
-        val picasso = Picasso.Builder(this)
-            .listener { _, _, exception -> exception.printStackTrace() }
-            .indicatorsEnabled(false)
-
-        val built = picasso.build()
-        Picasso.setSingletonInstance(built)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        initPicasso()
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -42,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         // Make sure actions in the ActionBar get propagated to the NavController
-        setSupportActionBar(findViewById(com.uniandes.vynilsmobile.R.id.my_toolbar))
+        setSupportActionBar(findViewById(R.id.my_toolbar))
         setupActionBarWithNavController(navController)
 
         binding.bottomNavigation.setOnItemSelectedListener {
@@ -102,6 +91,19 @@ class MainActivity : AppCompatActivity() {
         } else {
             splashErrorLayout.visibility = View.GONE
             splashErrorLayoutErrorText.text = text
+        }
+    }
+
+    fun showNotDataFoundLayout(show: Boolean, text: String) {
+        val splashNotDataFoundLayout: ConstraintLayout = findViewById(R.id.splash_no_data_found_layout)
+        val splashNotDataFoundText: TextView = findViewById(R.id.textViewNotFoundData)
+
+        if (show) {
+            splashNotDataFoundLayout.visibility = View.VISIBLE
+            splashNotDataFoundText.text = text
+        } else {
+            splashNotDataFoundLayout.visibility = View.GONE
+            splashNotDataFoundText.text = text
         }
     }
 }
