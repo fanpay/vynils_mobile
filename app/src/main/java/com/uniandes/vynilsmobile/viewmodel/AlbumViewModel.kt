@@ -18,7 +18,7 @@ import kotlinx.coroutines.withContext
 
 class AlbumViewModel(application: Application) :  AndroidViewModel(application) {
 
-    var albumsRepository = AlbumRepository(application, VinylRoomDatabase.getDatabase(application.applicationContext).albumsDao())
+    var albumsRepository: AlbumRepository
 
     private val _albums = MutableLiveData<List<Album>>()
 
@@ -40,23 +40,25 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
         get() = _eventNetworkErrorMessage
 
     init {
+        val albumDao = VinylRoomDatabase.getDatabase(application).albumsDao()
+        albumsRepository = AlbumRepository(application, albumDao)
         refreshDataFromNetwork()
     }
 
     private fun refreshDataFromNetwork() {
-        viewModelScope.launch (Dispatchers.Default){
+        viewModelScope.launch (Dispatchers.IO){
             try{
-                withContext(Dispatchers.IO){
+                withContext(Dispatchers.Main){
                     val data = albumsRepository.getAllAlbums()
-                    _albums.postValue(data)
+                    _albums.value = data
                 }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
             }
             catch (e:Exception){
                 Log.e("refreshDataFromNetwork", e.toString())
-                _eventNetworkErrorMessage.value = "Error refreshDataFromNetwork $e"
-                _eventNetworkError.value = true
+                _eventNetworkErrorMessage.postValue("Error refreshDataFromNetwork $e")
+                _eventNetworkError.postValue(true)
             }
 
         }
