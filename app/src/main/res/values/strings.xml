@@ -29,5 +29,7 @@
     <string name="error_retrieve_collectors">Error obteniendo colectores</string>
     <string name="error_retrieve_bands">Error obteniendo bandas</string>
 
+    <string name="not_data_found">No se encontraron datos</string>
+
 
 </resources>

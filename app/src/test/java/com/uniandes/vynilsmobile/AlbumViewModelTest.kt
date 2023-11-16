@@ -33,7 +33,7 @@ class AlbumViewModelTest {
     private val testDispatcher = newSingleThreadContext("Test thread")
 
     private val album1 = Album(
-        albumId = 1,
+        id = 1,
         name = "Sample Album 1",
         cover = "https://example.com/album_cover.jpg",
         releaseDate = "2023-01-01",
@@ -43,7 +43,7 @@ class AlbumViewModelTest {
     )
 
     private val album2 = Album(
-        albumId = 2,
+        id = 2,
         name = "Sample Album 2",
         cover = "https://example.com/album_cover.jpg",
         releaseDate = "2023-01-01",
@@ -67,6 +67,8 @@ class AlbumViewModelTest {
         val expectedAlbums = listOf(album1, album2)
 
         val application = mock(Application::class.java)
+        `when`(application.applicationContext).thenReturn(application)
+
         val repository = mock(AlbumRepository::class.java)
         runBlocking {
             `when`(repository.getAllAlbums()).thenReturn(expectedAlbums)
@@ -85,6 +87,8 @@ class AlbumViewModelTest {
     @Test
     fun `test refreshDataFromNetwork error`() {
         val application = mock(Application::class.java)
+        `when`(application.applicationContext).thenReturn(application)
+
         val repository = mock(AlbumRepository::class.java)
         val viewModel = AlbumViewModel(application)
         viewModel.albumsRepository = repository
