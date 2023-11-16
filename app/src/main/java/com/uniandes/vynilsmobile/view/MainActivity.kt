@@ -19,19 +19,8 @@ import com.uniandes.vynilsmobile.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
-    private fun initPicasso(){
-        val picasso = Picasso.Builder(this)
-            .listener { _, _, exception -> exception.printStackTrace() }
-            .indicatorsEnabled(false)
-
-        val built = picasso.build()
-        Picasso.setSingletonInstance(built)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        initPicasso()
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
