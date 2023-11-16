@@ -20,7 +20,7 @@ class AlbumDetailFragmentTest {
 
 
     private val album = Album(
-        albumId = 1,
+        id = 1,
         name = "Sample Album",
         cover = "https://example.com/album_cover.jpg",
         releaseDate = "2023-01-01",
