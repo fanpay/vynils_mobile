@@ -36,7 +36,7 @@ class CollectorRepository(val application: Application, private val collectorsDa
                 }
 
                 if (cached.isNotEmpty()) {
-                    Log.v("CollectorRepository", "Retrieving cached albums. ${cached.size} found.")
+                    Log.v("CollectorRepository", "Retrieving cached collectors. ${cached.size} found.")
                     return@withContext cached
                 }
 
@@ -47,10 +47,6 @@ class CollectorRepository(val application: Application, private val collectorsDa
                         collectors = response
 
                         CoroutineScope(Dispatchers.IO).launch {
-                            Log.v("CollectorRepository", "instertando collecttores")
-                            val gson = Gson()
-                            val listaa = gson.toJson(collectors)
-                            Log.v("CollectorRepository", listaa)
                             insertCollectorsIntoDatabase(collectors)
                         }
                     },
