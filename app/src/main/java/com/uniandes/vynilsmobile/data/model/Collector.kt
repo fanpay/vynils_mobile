@@ -2,6 +2,7 @@ package com.uniandes.vynilsmobile.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "collectors_table")
 data class Collector (
@@ -9,4 +10,4 @@ data class Collector (
     val name:String,
     val telephone:String,
     val email:String
-)
+): Serializable
