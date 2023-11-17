@@ -1,22 +1,31 @@
 package com.uniandes.vynilsmobile.view.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.uniandes.vynilsmobile.R
+import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.data.model.Collector
+import com.uniandes.vynilsmobile.databinding.AlbumItemBinding
 import com.uniandes.vynilsmobile.databinding.CollectorItemBinding
 //import com.uniandes.vynilsmobile.view.CollectorFragmentDirections
 
-class CollectorsAdapter : RecyclerView.Adapter<CollectorsAdapter.CollectorViewHolder>(){
+class CollectorsAdapter(private val progressBar: ProgressBar, private val onItemClick: (Collector) -> Unit) : RecyclerView.Adapter<CollectorsAdapter.CollectorViewHolder>(){
 
-    var collectors :List<Collector> = emptyList()
+    private val asyncListDiffer = AsyncListDiffer(this, CollectorDiffCallback())
+
+    var collectors: List<Collector>
+        get() = asyncListDiffer.currentList
         set(value) {
-            field = value
-            notifyDataSetChanged()
+            asyncListDiffer.submitList(value)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectorViewHolder {
@@ -29,14 +38,16 @@ class CollectorsAdapter : RecyclerView.Adapter<CollectorsAdapter.CollectorViewHo
     }
 
     override fun onBindViewHolder(holder: CollectorViewHolder, position: Int) {
-        holder.viewDataBinding.also {
-            it.collector = collectors[position]
+        val collector = asyncListDiffer.currentList[position]
+        holder.bind(collector)
+
+        holder.viewDataBinding.collector = collector
+        holder.viewDataBinding.root.setOnClickListener {
+            onItemClick(collector)
         }
-        /*holder.viewDataBinding.root.setOnClickListener {
-            val action = CollectorFragmentDirections.actionCollectorFragmentToAlbumFragment()
-            // Navigate using that action
-            holder.viewDataBinding.root.findNavController().navigate(action)
-        }*/
+
+        progressBar.visibility = if(itemCount > 0) View.GONE else View.VISIBLE
+
     }
 
     override fun getItemCount(): Int {
@@ -49,6 +60,20 @@ class CollectorsAdapter : RecyclerView.Adapter<CollectorsAdapter.CollectorViewHo
         companion object {
             @LayoutRes
             val LAYOUT = R.layout.collector_item
+        }
+
+        fun bind(collector: Collector) {
+            viewDataBinding.collector = collector
+
+        }
+
+    }
+    private class CollectorDiffCallback : DiffUtil.ItemCallback<Collector>() {
+        override fun areItemsTheSame(oldItem: Collector, newItem: Collector): Boolean {
+            return oldItem.collectorId == newItem.collectorId
+        }
+        override fun areContentsTheSame(oldItem: Collector, newItem: Collector): Boolean {
+            return oldItem == newItem
         }
     }
 }

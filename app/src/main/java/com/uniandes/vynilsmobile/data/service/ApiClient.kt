@@ -27,4 +27,5 @@ object ApiClient {
     }
 
     val collectors: CollectorApi = retrofit.create(CollectorApi::class.java)
+
 }

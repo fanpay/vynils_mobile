@@ -4,8 +4,11 @@ import android.app.Application
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.uniandes.vynilsmobile.data.exceptions.ApiRequestException
 import com.uniandes.vynilsmobile.data.model.Album
+import com.uniandes.vynilsmobile.data.model.Collector
 import com.uniandes.vynilsmobile.data.repository.AlbumRepository
+import com.uniandes.vynilsmobile.data.repository.CollectorRepository
 import com.uniandes.vynilsmobile.viewmodel.AlbumViewModel
+import com.uniandes.vynilsmobile.viewmodel.CollectorViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.newSingleThreadContext
@@ -22,7 +25,7 @@ import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 
-class AlbumViewModelTest {
+class CollectorViewModelTest {
     @get:Rule
     val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
@@ -32,24 +35,18 @@ class AlbumViewModelTest {
     @OptIn(DelicateCoroutinesApi::class)
     private val testDispatcher = newSingleThreadContext("Test thread")
 
-    private val album1 = Album(
-        id = 1,
-        name = "Sample Album 1",
-        cover = "https://example.com/album_cover.jpg",
-        releaseDate = "2023-01-01",
-        description = "This is a sample album",
-        genre = "Rock",
-        recordLabel = "Sample Records"
+    private val collector1 = Collector(
+        collectorId = 1,
+        name = "Sample Collector 1",
+        telephone = "1234567890",
+        email = "hola@hotmail.com"
     )
 
-    private val album2 = Album(
-        id = 2,
-        name = "Sample Album 2",
-        cover = "https://example.com/album_cover.jpg",
-        releaseDate = "2023-01-01",
-        description = "This is a sample album",
-        genre = "Rock",
-        recordLabel = "Sample Records"
+    private val collector2 = Collector(
+        collectorId = 2,
+        name = "Sample Collector 2",
+        telephone = "0987654321",
+        email = "hola12334@hotmail.com"
     )
     @Before
     fun setup() {
@@ -64,22 +61,20 @@ class AlbumViewModelTest {
 
     @Test
     fun `test refreshDataFromNetwork success`() {
-        val expectedAlbums = listOf(album1, album2)
+        val expectedCollectors = listOf(collector1, collector2)
 
         val application = mock(Application::class.java)
-        `when`(application.applicationContext).thenReturn(application)
-
-        val repository = mock(AlbumRepository::class.java)
+        val repository = mock(CollectorRepository::class.java)
         runBlocking {
-            `when`(repository.getAllAlbums()).thenReturn(expectedAlbums)
+            `when`(repository.getAllCollectors()).thenReturn(expectedCollectors)
         }
 
-        val viewModel = AlbumViewModel(application)
-        viewModel.albumsRepository = repository
+        val viewModel = CollectorViewModel(application)
+        viewModel.collectorsRepository = repository
 
-        `when`(runBlocking { repository.getAllAlbums() }).thenReturn(expectedAlbums)
+        `when`(runBlocking { repository.getAllCollectors() }).thenReturn(expectedCollectors)
 
-        Assert.assertEquals(expectedAlbums, viewModel.albums.value)
+        Assert.assertEquals(expectedCollectors, viewModel.collectors.value)
         Assert.assertEquals(false, viewModel.eventNetworkError.value)
         Assert.assertEquals(false, viewModel.isNetworkErrorShown.value)
     }
@@ -87,15 +82,13 @@ class AlbumViewModelTest {
     @Test
     fun `test refreshDataFromNetwork error`() {
         val application = mock(Application::class.java)
-        `when`(application.applicationContext).thenReturn(application)
+        val repository = mock(CollectorRepository::class.java)
+        val viewModel = CollectorViewModel(application)
+        viewModel.collectorsRepository = repository
 
-        val repository = mock(AlbumRepository::class.java)
-        val viewModel = AlbumViewModel(application)
-        viewModel.albumsRepository = repository
+        `when`(runBlocking { repository.getAllCollectors() }).thenThrow(ApiRequestException("Error"))
 
-        `when`(runBlocking { repository.getAllAlbums() }).thenThrow(ApiRequestException("Error"))
-
-        Assert.assertNull(viewModel.albums.value)
+        Assert.assertNull(viewModel.collectors.value)
         viewModel.onNetworkErrorShown()
         Assert.assertEquals(true, viewModel.isNetworkErrorShown.value)
     }
