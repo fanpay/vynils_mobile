@@ -1,7 +1,6 @@
 package com.uniandes.vynilsmobile.data.repository
 
 import android.app.Application
-<<<<<<< HEAD
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -12,10 +11,6 @@ import com.uniandes.vynilsmobile.data.database.AlbumsDao
 import com.uniandes.vynilsmobile.data.database.CollectorsDao
 import com.uniandes.vynilsmobile.data.exceptions.ApiRequestException
 import com.uniandes.vynilsmobile.data.model.Album
-=======
-import com.uniandes.vynilsmobile.R
-import com.uniandes.vynilsmobile.data.exceptions.ApiRequestException
->>>>>>> develop
 import com.uniandes.vynilsmobile.data.model.Collector
 import com.uniandes.vynilsmobile.data.service.RetrofitBroker
 import kotlinx.coroutines.CoroutineScope
@@ -23,7 +18,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-<<<<<<< HEAD
 class CollectorRepository(val application: Application, private val collectorsDao: CollectorsDao) {
     suspend fun getAllCollectors(): List<Collector> {
         return withContext(Dispatchers.IO) {
@@ -92,20 +86,4 @@ class CollectorRepository(val application: Application, private val collectorsDa
     suspend fun createCollector(collector: Collector) = RetrofitBroker.createCollector(collector)
 
 
-=======
-class CollectorRepository(val application: Application) {
-    suspend fun getAllCollectors(): List<Collector> {
-        return try {
-            var collectors: List<Collector> = emptyList()
-            RetrofitBroker.getCollectors(
-                onComplete = { response -> collectors = response },
-                onError = { error -> throw ApiRequestException(application.resources.getString(R.string.error_retrieve_collectors), error) }
-            )
-            collectors
-        } catch (e: Throwable) {
-            throw ApiRequestException("${R.string.error_retrieve_collectors} -> ${e.cause}", e)
-        }
-    }
-    suspend fun createCollector(collector: Collector) = RetrofitBroker.createCollector(collector)
->>>>>>> develop
 }

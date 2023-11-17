@@ -48,12 +48,6 @@ class CollectorFragment : Fragment(R.layout.collector_fragment) {
     ): View? {
         _binding = CollectorFragmentBinding.inflate(inflater, container, false)
 
-<<<<<<< HEAD
-=======
-        val bar = (activity as AppCompatActivity).supportActionBar
-        bar?.title = getString(R.string.title_collectors)
-
->>>>>>> develop
         progressBar = binding.progressBar
         return binding.root
     }
@@ -85,15 +79,12 @@ class CollectorFragment : Fragment(R.layout.collector_fragment) {
         viewModel.collectors.observe(viewLifecycleOwner) { collectors ->
             collectorAdapter?.collectors = collectors
         }
-<<<<<<< HEAD
 
         viewModel.eventNotDataFound.observe(viewLifecycleOwner) { isNotDataFoundShown ->
             if (isNotDataFoundShown) notDataFound()
             else  mainActivity.showErrorLayout(false, "")
         }
 
-=======
->>>>>>> develop
         viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->
             if (isNetworkError) onNetworkError()
             else  mainActivity.showErrorLayout(false, "")
@@ -112,7 +103,6 @@ class CollectorFragment : Fragment(R.layout.collector_fragment) {
             mainActivity.showErrorLayout(true, resources.getString(R.string.error_network_connection))
         }
     }
-<<<<<<< HEAD
 
     private fun notDataFound() {
         if(!viewModel.isNotDataFoundShown.value!!) {
@@ -128,6 +118,4 @@ class CollectorFragment : Fragment(R.layout.collector_fragment) {
             )
         }
     }
-=======
->>>>>>> develop
 }
