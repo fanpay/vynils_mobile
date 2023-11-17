@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.uniandes.vynilsmobile.R
+import androidx.navigation.fragment.findNavController
 import com.uniandes.vynilsmobile.data.model.Artist
 import com.uniandes.vynilsmobile.databinding.ArtistFragmentBinding
 import com.uniandes.vynilsmobile.view.adapters.ArtistsAdapter
@@ -56,7 +57,9 @@ class ArtistFragment : Fragment(R.layout.artist_fragment) {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
 
-        val onItemClick: (Artist) -> Unit = {
+        val onItemClick: (Artist) -> Unit = { artist ->
+            val action = ArtistFragmentDirections.actionArtistFragmentToArtistDetailFragment(artist)
+            findNavController().navigate(action)
         }
 
         artistAdapter = ArtistsAdapter(progressBar, onItemClick)
