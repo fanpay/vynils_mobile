@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
+import com.google.gson.Gson
 import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.data.database.AlbumsDao
 import com.uniandes.vynilsmobile.data.database.CollectorsDao
@@ -33,23 +34,23 @@ class CollectorRepository(val application: Application, private val collectorsDa
                     Log.v("CollectorRepository", "No Internet. No cached data was found. Retrieving empty list.")
                     return@withContext cached
                 }
-                /*
+
                 if (cached.isNotEmpty()) {
                     Log.v("CollectorRepository", "Retrieving cached albums. ${cached.size} found.")
                     return@withContext cached
                 }
-
-                 */
-
-
 
                 var collectors: List<Collector> = emptyList()
 
                 RetrofitBroker.getCollectors(
                     onComplete = { response ->
                         collectors = response
+
                         CoroutineScope(Dispatchers.IO).launch {
                             Log.v("CollectorRepository", "instertando collecttores")
+                            val gson = Gson()
+                            val listaa = gson.toJson(collectors)
+                            Log.v("CollectorRepository", listaa)
                             insertCollectorsIntoDatabase(collectors)
                         }
                     },
