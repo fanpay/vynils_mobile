@@ -20,7 +20,6 @@ import kotlinx.coroutines.launch
 
 
 class CollectorViewModel(application: Application) :  AndroidViewModel(application) {
-    var collectorsRepository = CollectorRepository(application)
 
     var collectorsRepository: CollectorRepository
 

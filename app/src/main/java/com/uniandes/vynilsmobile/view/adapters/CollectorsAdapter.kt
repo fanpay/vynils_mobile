@@ -55,7 +55,7 @@ class CollectorsAdapter(private val progressBar: ProgressBar, private val onItem
     }
 
 
-    class CollectorViewHolder(private val viewDataBinding: CollectorItemBinding) :
+    class CollectorViewHolder(val viewDataBinding: CollectorItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
         companion object {
             @LayoutRes
