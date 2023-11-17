@@ -39,6 +39,7 @@ class CollectorsAdapter(private val progressBar: ProgressBar, private val onItem
 
     override fun onBindViewHolder(holder: CollectorViewHolder, position: Int) {
         val collector = asyncListDiffer.currentList[position]
+<<<<<<< HEAD
         holder.bind(collector)
 
         holder.viewDataBinding.collector = collector
@@ -48,6 +49,16 @@ class CollectorsAdapter(private val progressBar: ProgressBar, private val onItem
 
         progressBar.visibility = if(itemCount > 0) View.GONE else View.VISIBLE
 
+=======
+        holder.bind(collector, onItemClick)
+
+        if (itemCount > 0) {
+            progressBar.visibility = View.GONE
+        } else {
+            progressBar.visibility = View.VISIBLE
+        }
+
+>>>>>>> develop
     }
 
     override fun getItemCount(): Int {
@@ -55,16 +66,24 @@ class CollectorsAdapter(private val progressBar: ProgressBar, private val onItem
     }
 
 
-    class CollectorViewHolder(val viewDataBinding: CollectorItemBinding) :
+    class CollectorViewHolder(private val viewDataBinding: CollectorItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
         companion object {
             @LayoutRes
             val LAYOUT = R.layout.collector_item
         }
 
+<<<<<<< HEAD
         fun bind(collector: Collector) {
             viewDataBinding.collector = collector
 
+=======
+        fun bind(collector: Collector, onItemClick: (Collector) -> Unit) {
+            viewDataBinding.collector = collector
+            viewDataBinding.root.setOnClickListener {
+                onItemClick(collector)
+            }
+>>>>>>> develop
         }
 
     }

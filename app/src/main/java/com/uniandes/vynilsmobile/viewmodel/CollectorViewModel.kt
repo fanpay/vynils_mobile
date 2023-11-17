@@ -8,17 +8,25 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+<<<<<<< HEAD
 import com.uniandes.vynilsmobile.data.database.VinylRoomDatabase
+=======
+>>>>>>> develop
 import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.data.model.Collector
 import com.uniandes.vynilsmobile.data.repository.AlbumRepository
 import com.uniandes.vynilsmobile.data.repository.CollectorRepository
+<<<<<<< HEAD
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+=======
+import kotlinx.coroutines.launch
+>>>>>>> develop
 
 
 class CollectorViewModel(application: Application) :  AndroidViewModel(application) {
+    var collectorsRepository = CollectorRepository(application)
 
     var collectorsRepository: CollectorRepository
 
@@ -37,6 +45,7 @@ class CollectorViewModel(application: Application) :  AndroidViewModel(applicati
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
+<<<<<<< HEAD
     private var _eventNotDataFound = MutableLiveData(false)
 
     val eventNotDataFound: LiveData<Boolean>
@@ -47,17 +56,23 @@ class CollectorViewModel(application: Application) :  AndroidViewModel(applicati
     val isNotDataFoundShown: LiveData<Boolean>
         get() = _isNotDataFoundShown
 
+=======
+>>>>>>> develop
     private var _eventNetworkErrorMessage = MutableLiveData<String>()
     val eventNetworkErrorMessage: LiveData<String>
         get() = _eventNetworkErrorMessage
 
     init {
+<<<<<<< HEAD
         val collectorDao = VinylRoomDatabase.getDatabase(application).collectorsDao()
         collectorsRepository = CollectorRepository(application, collectorDao)
+=======
+>>>>>>> develop
         refreshDataFromNetwork()
     }
 
     private fun refreshDataFromNetwork() {
+<<<<<<< HEAD
         viewModelScope.launch (Dispatchers.IO){
             try{
                 withContext(Dispatchers.Main){
@@ -84,6 +99,19 @@ class CollectorViewModel(application: Application) :  AndroidViewModel(applicati
                 _isNotDataFoundShown.postValue(false)
             }
 
+=======
+        viewModelScope.launch {
+            try {
+                _collectors.value = collectorsRepository.getAllCollectors()
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+            }
+            catch(e:Exception) {
+                Log.e("refreshDataFromNetwork", e.toString())
+                _eventNetworkErrorMessage.value = "Error refreshDataFromNetwork $e"
+                _eventNetworkError.value = true
+            }
+>>>>>>> develop
         }
     }
 
@@ -91,10 +119,13 @@ class CollectorViewModel(application: Application) :  AndroidViewModel(applicati
         _isNetworkErrorShown.value = true
     }
 
+<<<<<<< HEAD
     fun onNotDataFoundShown() {
         _isNotDataFoundShown.value = true
     }
 
+=======
+>>>>>>> develop
     class Factory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(CollectorViewModel::class.java)) {
