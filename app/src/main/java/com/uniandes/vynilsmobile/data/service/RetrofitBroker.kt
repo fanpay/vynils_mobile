@@ -123,7 +123,7 @@ class RetrofitBroker {
             }
         }
 
-        suspend fun getAllComments (): List<Comment> {
+        fun getAllComments (): List<Comment> {
             return listOf()
         }
 

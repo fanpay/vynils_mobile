@@ -40,7 +40,7 @@ class ArtistFragment : Fragment(R.layout.artist_fragment) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = ArtistFragmentBinding.inflate(inflater, container, false)
 
         val bar = (activity as AppCompatActivity).supportActionBar

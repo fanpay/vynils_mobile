@@ -20,6 +20,5 @@ class ArtistRepository(val application: Application) {
             throw ApiRequestException("${R.string.error_retrieve_albums} -> ${e.cause}", e)
         }
     }
-    suspend fun createArtist(artist: Artist) = RetrofitBroker.createArtist(artist)
 
 }

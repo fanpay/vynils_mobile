@@ -41,7 +41,7 @@ class AlbumFragment : Fragment(R.layout.album_fragment) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = AlbumFragmentBinding.inflate(inflater, container, false)
 
         progressBar = binding.progressBar

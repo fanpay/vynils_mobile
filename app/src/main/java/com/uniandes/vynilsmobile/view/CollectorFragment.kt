@@ -9,20 +9,13 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
+import com.uniandes.vynilsmobile.R
+import com.uniandes.vynilsmobile.data.model.Collector
 import com.uniandes.vynilsmobile.databinding.CollectorFragmentBinding
 import com.uniandes.vynilsmobile.view.adapters.CollectorsAdapter
-import com.uniandes.vynilsmobile.R
-import com.uniandes.vynilsmobile.data.model.Album
-import com.uniandes.vynilsmobile.data.model.Collector
-import com.uniandes.vynilsmobile.databinding.AlbumFragmentBinding
-import com.uniandes.vynilsmobile.view.adapters.AlbumsAdapter
-import com.uniandes.vynilsmobile.viewmodel.AlbumViewModel
 import com.uniandes.vynilsmobile.viewmodel.CollectorViewModel
 
 
@@ -45,7 +38,7 @@ class CollectorFragment : Fragment(R.layout.collector_fragment) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = CollectorFragmentBinding.inflate(inflater, container, false)
 
         progressBar = binding.progressBar

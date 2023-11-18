@@ -1,8 +1,6 @@
 package com.uniandes.vynilsmobile.data.service
 
-import com.uniandes.vynilsmobile.data.model.Artist
 import com.uniandes.vynilsmobile.data.model.Collector
-
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

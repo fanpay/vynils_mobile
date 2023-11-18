@@ -5,12 +5,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
-import com.google.gson.Gson
 import com.uniandes.vynilsmobile.R
-import com.uniandes.vynilsmobile.data.database.AlbumsDao
 import com.uniandes.vynilsmobile.data.database.CollectorsDao
 import com.uniandes.vynilsmobile.data.exceptions.ApiRequestException
-import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.data.model.Collector
 import com.uniandes.vynilsmobile.data.service.RetrofitBroker
 import kotlinx.coroutines.CoroutineScope
@@ -82,8 +79,5 @@ class CollectorRepository(val application: Application, private val collectorsDa
         collectorsDao.insertAll(collectors)
         Log.v("CollectorRepository", "Inserted ${collectors.size} collectors into the local database.")
     }
-
-    suspend fun createCollector(collector: Collector) = RetrofitBroker.createCollector(collector)
-
 
 }
