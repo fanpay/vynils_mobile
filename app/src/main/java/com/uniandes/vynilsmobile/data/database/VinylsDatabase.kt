@@ -16,6 +16,7 @@ import com.uniandes.vynilsmobile.data.model.Comment
 )
 abstract class VinylRoomDatabase : RoomDatabase() {
     abstract fun albumsDao(): AlbumsDao
+    abstract fun artistsDao(): ArtistsDao
     abstract fun collectorsDao(): CollectorsDao
     abstract fun commentsDao(): CommentsDao
 

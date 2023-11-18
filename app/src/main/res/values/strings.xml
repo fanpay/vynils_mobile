@@ -23,13 +23,12 @@
     <string name="title_albums_bnb">Álbumes</string>
     <string name="title_artists_bnb">Artistas</string>
     <string name="title_collectors_bnb">Coleccionistas</string>
-
     <string name="error_network_connection">Error de comunicación</string>
     <string name="error_retrieve_albums">Error obteniendo álbumes</string>
     <string name="error_retrieve_collectors">Error obteniendo colectores</string>
     <string name="error_retrieve_bands">Error obteniendo bandas</string>
-
     <string name="not_data_found">No se encontraron datos</string>
+    <string name="error_retrieve_artists">Error obteniendo artistas</string>
 
 
 </resources>
