@@ -21,20 +21,20 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class AlbumActivityTest {
+class CollectorActivityTest {
 
     @Rule
     @JvmField
     var mActivityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Before
-    fun navigateToAlbumFragmentFromBottomNavigationMenu(){
+    fun navigateToCollectorFragmentFromBottomNavigationMenu(){
         Thread.sleep(300)
 
         val bottomNavigationItemView = onView(
             allOf(
-                withId(R.id.albumFragment),
-                withContentDescription(R.string.title_albums),
+                withId(R.id.collectorsFragment),
+                withContentDescription(R.string.title_collectors),
                 isDescendantOfA(
                     isDescendantOfA(withId(R.id.bottom_navigation))
                 ),
@@ -44,31 +44,45 @@ class AlbumActivityTest {
         bottomNavigationItemView.perform(click())
     }
     @Test
-    fun checkFirstImageInAlbumRecyclerView() {
-        Thread.sleep(500)
-
-        onView(withIndex(withId(R.id.imageView1), 0)).perform(scrollTo())
-        onView(withIndex(withId(R.id.imageView1), 0)).check(matches(isDisplayed()))
-    }
-
-    @Test
-    fun checkFirstTextInAlbumRecyclerView() {
+    fun checkFirstTextInCollectorRecyclerView() {
         Thread.sleep(500)
 
         onView(withIndex(withId(R.id.textView1), 0)).perform(scrollTo())
         onView(withIndex(withId(R.id.textView1), 0)).check(matches(isDisplayed()))
 
         // Verifica el texto dentro del elemento en la posición 0 del RecyclerView
-        val expectedText = "Buscando América"
+        val expectedText = "Manolo Bellon"
         onView(withText(expectedText)).check(matches(withIndex(withId(R.id.textView1), 0)))
+    }
+    @Test
+    fun checkSecondTextInCollectorRecyclerView() {
+        Thread.sleep(500)
+
+        onView(withIndex(withId(R.id.textView2), 0)).perform(scrollTo())
+        onView(withIndex(withId(R.id.textView2), 0)).check(matches(isDisplayed()))
+
+        // Verifica el texto dentro del elemento en la posición 0 del RecyclerView
+        val expectedText = "3502457896"
+        onView(withText(expectedText)).check(matches(withIndex(withId(R.id.textView2), 0)))
+    }
+    @Test
+    fun checkThirdTextInCollectorRecyclerView() {
+        Thread.sleep(500)
+
+        onView(withIndex(withId(R.id.textView3), 0)).perform(scrollTo())
+        onView(withIndex(withId(R.id.textView3), 0)).check(matches(isDisplayed()))
+
+        // Verifica el texto dentro del elemento en la posición 0 del RecyclerView
+        val expectedText = "manollo@caracol.com.co"
+        onView(withText(expectedText)).check(matches(withIndex(withId(R.id.textView3), 0)))
     }
 
     @Test
     fun checkFirstViewColorInAlbumRecyclerView() {
         Thread.sleep(500)
 
-        onView(withIndex(withId(R.id.albumItemSeparator), 0)).perform(scrollTo())
-        onView(withIndex(withId(R.id.albumItemSeparator), 0)).check(matches(isDisplayed()))
+        onView(withIndex(withId(R.id.collectorItemSeparator), 0)).perform(scrollTo())
+        onView(withIndex(withId(R.id.collectorItemSeparator), 0)).check(matches(isDisplayed()))
     }
 
     private fun withIndex(matcher: Matcher<View>, index: Int): Matcher<View> {

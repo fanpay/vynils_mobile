@@ -3,15 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.CollectorFragment"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp">
+    tools:context=".view.ArtistFragment"
+    android:layout_marginHorizontal="10dp">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/collectorsRv"
+        android:id="@+id/artistRv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/collector_item" />
+        tools:listitem="@layout/artist_item"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -20,4 +19,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         />
+
 </FrameLayout>

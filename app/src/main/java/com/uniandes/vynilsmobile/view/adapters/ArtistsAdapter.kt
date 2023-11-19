@@ -16,55 +16,55 @@ import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import com.uniandes.vynilsmobile.R
-import com.uniandes.vynilsmobile.data.model.Album
-import com.uniandes.vynilsmobile.databinding.AlbumItemBinding
+import com.uniandes.vynilsmobile.data.model.Artist
+import com.uniandes.vynilsmobile.databinding.ArtistItemBinding
 
-class AlbumsAdapter(private val progressBar: ProgressBar, private val onItemClick: (Album) -> Unit) : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>(){
+class ArtistsAdapter(private val progressBar: ProgressBar, private val onItemClick: (Artist) -> Unit) : RecyclerView.Adapter<ArtistsAdapter.ArtistViewHolder>(){
 
-    private val asyncListDiffer = AsyncListDiffer(this, AlbumDiffCallback())
+    private val asyncListDiffer = AsyncListDiffer(this, ArtistDiffCallback())
 
-    var albums: List<Album>
+    var artists: List<Artist>
         get() = asyncListDiffer.currentList
         set(value) {
             asyncListDiffer.submitList(value)
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
-        val withDataBinding: AlbumItemBinding = DataBindingUtil.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArtistViewHolder {
+        val withDataBinding: ArtistItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            AlbumViewHolder.LAYOUT,
+            ArtistViewHolder.LAYOUT,
             parent,
             false)
-        return AlbumViewHolder(withDataBinding)
+        return ArtistViewHolder(withDataBinding)
     }
 
-    override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
-        val album = asyncListDiffer.currentList[position]
-        holder.bind(album)
+    override fun onBindViewHolder(holder: ArtistViewHolder, position: Int) {
+        val artist = asyncListDiffer.currentList[position]
+        holder.bind(artist)
 
-        holder.viewDataBinding.album = album
+        holder.viewDataBinding.artist = artist
         holder.viewDataBinding.root.setOnClickListener {
-            onItemClick(album)
+            onItemClick(artist)
         }
 
         progressBar.visibility = if(itemCount > 0) View.GONE else View.VISIBLE
     }
 
     override fun getItemCount(): Int {
-        return albums.size
+        return artists.size
     }
 
 
-    class AlbumViewHolder(val viewDataBinding: AlbumItemBinding) :
+    class ArtistViewHolder(val viewDataBinding: ArtistItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
         companion object {
             @LayoutRes
-            val LAYOUT = R.layout.album_item
+            val LAYOUT = R.layout.artist_item
         }
 
-        fun bind(album: Album) {
+        fun bind(artist: Artist) {
             Picasso.get()
-                .load(album.cover.toUri().buildUpon().scheme("https").build())
+                .load(artist.image.toUri().buildUpon().scheme("https").build())
                 .placeholder(R.drawable.ic_baseline_album_24)
                 .error(R.drawable.ic_baseline_android_24)
                 .fit()
@@ -76,12 +76,12 @@ class AlbumsAdapter(private val progressBar: ProgressBar, private val onItemClic
                     }
                     override fun onError(e: Exception?) {
                         Picasso.get()
-                            .load(album.cover.toUri().buildUpon().scheme("https").build())
-                            .placeholder(R.drawable.ic_baseline_album_24)
+                            .load(artist.image.toUri().buildUpon().scheme("https").build())
+                            .placeholder(R.drawable.ic_baseline_person_24)
                             .error(R.drawable.ic_baseline_android_24)
                             .fit()
                             .centerCrop()
-                            .memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
+                            .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                             .networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE)
                             .into(viewDataBinding.imageView1, object : Callback {
                                 override fun onSuccess() {
@@ -98,11 +98,11 @@ class AlbumsAdapter(private val progressBar: ProgressBar, private val onItemClic
                 })
         }
     }
-    private class AlbumDiffCallback : DiffUtil.ItemCallback<Album>() {
-        override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean {
-            return oldItem.id == newItem.id
+    private class ArtistDiffCallback : DiffUtil.ItemCallback<Artist>() {
+        override fun areItemsTheSame(oldItem: Artist, newItem: Artist): Boolean {
+            return oldItem.artistId == newItem.artistId
         }
-        override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean {
+        override fun areContentsTheSame(oldItem: Artist, newItem: Artist): Boolean {
             return oldItem == newItem
         }
     }

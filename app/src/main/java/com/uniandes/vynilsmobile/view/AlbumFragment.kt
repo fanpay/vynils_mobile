@@ -7,19 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.uniandes.vynilsmobile.R
+import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.databinding.AlbumFragmentBinding
 import com.uniandes.vynilsmobile.view.adapters.AlbumsAdapter
 import com.uniandes.vynilsmobile.viewmodel.AlbumViewModel
 
+
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class AlbumFragment : Fragment() {
+class AlbumFragment : Fragment(R.layout.album_fragment) {
     private var _binding: AlbumFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
@@ -38,17 +43,29 @@ class AlbumFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = AlbumFragmentBinding.inflate(inflater, container, false)
 
         progressBar = binding.progressBar
-        albumAdapter = AlbumsAdapter(progressBar)
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+        }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         recyclerView = binding.albumsRv
         recyclerView.layoutManager = LinearLayoutManager(context)
+
+        val onItemClick: (Album) -> Unit = { album ->
+            //findNavController().popBackStack()
+            val action = AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(album)
+            findNavController().navigate(action)
+        }
+
+        albumAdapter = AlbumsAdapter(progressBar, onItemClick)
         recyclerView.adapter = albumAdapter
     }
 
@@ -57,11 +74,20 @@ class AlbumFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        activity.actionBar?.title = getString(R.string.title_albums)
+
+        val bar = (activity as AppCompatActivity).supportActionBar
+        bar?.title = getString(R.string.title_albums)
+
         viewModel = ViewModelProvider(this, AlbumViewModel.Factory(activity.application))[AlbumViewModel::class.java]
         viewModel.albums.observe(viewLifecycleOwner) { albums ->
             albumAdapter?.albums = albums
         }
+
+        viewModel.eventNotDataFound.observe(viewLifecycleOwner) { isNotDataFoundShown ->
+            if (isNotDataFoundShown) notDataFound()
+            else  mainActivity.showErrorLayout(false, "")
+        }
+
         viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->
             if (isNetworkError) onNetworkError()
             else  mainActivity.showErrorLayout(false, "")
@@ -75,9 +101,29 @@ class AlbumFragment : Fragment() {
 
     private fun onNetworkError() {
        if(!viewModel.isNetworkErrorShown.value!!) {
-            Toast.makeText(activity, resources.getString(R.string.error_network_connection), Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                activity,
+                resources.getString(R.string.error_network_connection),
+                Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
-            mainActivity.showErrorLayout(true, resources.getString(R.string.error_network_connection))
+            mainActivity.showErrorLayout(
+                true,
+                resources.getString(R.string.error_network_connection)
+            )
+        }
+    }
+    private fun notDataFound() {
+        if(!viewModel.isNotDataFoundShown.value!!) {
+            Toast.makeText(
+                activity,
+                resources.getString(R.string.not_data_found),
+                Toast.LENGTH_LONG
+            ).show()
+            viewModel.onNotDataFoundShown()
+            mainActivity.showNotDataFoundLayout(
+                true,
+                resources.getString(R.string.not_data_found)
+            )
         }
     }
 }

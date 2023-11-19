@@ -21,7 +21,7 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class AlbumActivityTest {
+class ArtistActivityTest {
 
     @Rule
     @JvmField
@@ -33,8 +33,8 @@ class AlbumActivityTest {
 
         val bottomNavigationItemView = onView(
             allOf(
-                withId(R.id.albumFragment),
-                withContentDescription(R.string.title_albums),
+                withId(R.id.artistFragment),
+                withContentDescription(R.string.title_artists),
                 isDescendantOfA(
                     isDescendantOfA(withId(R.id.bottom_navigation))
                 ),
@@ -44,7 +44,7 @@ class AlbumActivityTest {
         bottomNavigationItemView.perform(click())
     }
     @Test
-    fun checkFirstImageInAlbumRecyclerView() {
+    fun checkFirstImageInArtistRecyclerView() {
         Thread.sleep(500)
 
         onView(withIndex(withId(R.id.imageView1), 0)).perform(scrollTo())
@@ -52,23 +52,23 @@ class AlbumActivityTest {
     }
 
     @Test
-    fun checkFirstTextInAlbumRecyclerView() {
+    fun checkFirstTextInArtistRecyclerView() {
         Thread.sleep(500)
 
         onView(withIndex(withId(R.id.textView1), 0)).perform(scrollTo())
         onView(withIndex(withId(R.id.textView1), 0)).check(matches(isDisplayed()))
 
         // Verifica el texto dentro del elemento en la posición 0 del RecyclerView
-        val expectedText = "Buscando América"
+        val expectedText = "Rubén Blades Bellido de Luna"
         onView(withText(expectedText)).check(matches(withIndex(withId(R.id.textView1), 0)))
     }
 
     @Test
-    fun checkFirstViewColorInAlbumRecyclerView() {
+    fun checkFirstViewColorInArtistRecyclerView() {
         Thread.sleep(500)
 
-        onView(withIndex(withId(R.id.albumItemSeparator), 0)).perform(scrollTo())
-        onView(withIndex(withId(R.id.albumItemSeparator), 0)).check(matches(isDisplayed()))
+        onView(withIndex(withId(R.id.artistItemSeparator), 0)).perform(scrollTo())
+        onView(withIndex(withId(R.id.artistItemSeparator), 0)).check(matches(isDisplayed()))
     }
 
     private fun withIndex(matcher: Matcher<View>, index: Int): Matcher<View> {
