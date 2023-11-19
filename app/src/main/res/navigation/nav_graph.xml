@@ -28,6 +28,7 @@
         android:label="artist_fragment"
         tools:layout="@layout/artist_fragment" >
     </fragment>
+
     <fragment
         android:id="@+id/collectorsFragment"
         android:name="com.uniandes.vynilsmobile.view.CollectorFragment"
