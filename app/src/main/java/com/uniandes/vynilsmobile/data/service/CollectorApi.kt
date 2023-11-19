@@ -13,5 +13,4 @@ interface CollectorApi {
 
     @POST("collectors")
     suspend fun createCollector(@Body collector: Collector) : Response<Collector>
-
 }
