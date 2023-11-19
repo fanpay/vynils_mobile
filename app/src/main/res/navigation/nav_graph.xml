@@ -27,8 +27,19 @@
         android:name="com.uniandes.vynilsmobile.view.ArtistFragment"
         android:label="artist_fragment"
         tools:layout="@layout/artist_fragment" >
+        <action
+            android:id="@+id/action_artistFragment_to_artistDetailFragment"
+            app:destination="@id/artistDetailFragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/artistDetailFragment"
+        android:name="com.uniandes.vynilsmobile.view.ArtistDetailFragment"
+        android:label="artist_detail_fragment"
+        tools:layout="@layout/artist_detail_fragment" >
+        <argument
+            android:name="artist"
+            app:argType="com.uniandes.vynilsmobile.data.model.Artist" />
+    </fragment>
     <fragment
         android:id="@+id/collectorsFragment"
         android:name="com.uniandes.vynilsmobile.view.CollectorFragment"

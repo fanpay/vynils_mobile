@@ -1,6 +1,5 @@
 package com.uniandes.vynilsmobile.data.service
 
-import com.uniandes.vynilsmobile.data.model.Artist
 import com.uniandes.vynilsmobile.data.model.Collector
 
 import retrofit2.Response
@@ -15,5 +14,4 @@ interface CollectorApi {
 
     @POST("collectors")
     suspend fun createCollector(@Body collector: Collector) : Response<Collector>
-
 }

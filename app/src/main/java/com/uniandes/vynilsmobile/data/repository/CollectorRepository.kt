@@ -5,12 +5,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
-import com.google.gson.Gson
 import com.uniandes.vynilsmobile.R
-import com.uniandes.vynilsmobile.data.database.AlbumsDao
 import com.uniandes.vynilsmobile.data.database.CollectorsDao
 import com.uniandes.vynilsmobile.data.exceptions.ApiRequestException
-import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.data.model.Collector
 import com.uniandes.vynilsmobile.data.service.RetrofitBroker
 import kotlinx.coroutines.CoroutineScope

@@ -1,22 +1,17 @@
 package com.uniandes.vynilsmobile.view.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.uniandes.vynilsmobile.R
-import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.data.model.Collector
-import com.uniandes.vynilsmobile.databinding.AlbumItemBinding
 import com.uniandes.vynilsmobile.databinding.CollectorItemBinding
-//import com.uniandes.vynilsmobile.view.CollectorFragmentDirections
 
 class CollectorsAdapter(private val progressBar: ProgressBar, private val onItemClick: (Collector) -> Unit) : RecyclerView.Adapter<CollectorsAdapter.CollectorViewHolder>(){
 
