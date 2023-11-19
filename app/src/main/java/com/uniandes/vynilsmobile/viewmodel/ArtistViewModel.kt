@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class ArtistViewModel(application: Application) :  AndroidViewModel(application) {
 
-    var artistsRepository = ArtistRepository(application)
+    var artistsRepository: ArtistRepository
 
     private val _artists = MutableLiveData<List<Artist>>()
 
@@ -32,11 +32,8 @@ class ArtistViewModel(application: Application) :  AndroidViewModel(application)
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
-    private var _eventNetworkErrorMessage = MutableLiveData<String>()
-    val eventNetworkErrorMessage: LiveData<String>
-        get() = _eventNetworkErrorMessage
-
     init {
+        artistsRepository = ArtistRepository(application)
         refreshDataFromNetwork()
     }
 
@@ -49,7 +46,6 @@ class ArtistViewModel(application: Application) :  AndroidViewModel(application)
             }
             catch(e:Exception) {
                 Log.e("refreshDataFromNetwork", e.toString())
-                _eventNetworkErrorMessage.value = "Error refreshDataFromNetwork $e"
                 _eventNetworkError.value = true
             }
         }

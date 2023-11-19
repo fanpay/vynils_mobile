@@ -80,7 +80,4 @@ class CollectorRepository(val application: Application, private val collectorsDa
         Log.v("CollectorRepository", "Inserted ${collectors.size} collectors into the local database.")
     }
 
-    suspend fun createCollector(collector: Collector) = RetrofitBroker.createCollector(collector)
-
-
 }

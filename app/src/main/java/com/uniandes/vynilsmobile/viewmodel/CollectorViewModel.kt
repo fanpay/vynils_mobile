@@ -45,10 +45,6 @@ class CollectorViewModel(application: Application) :  AndroidViewModel(applicati
     val isNotDataFoundShown: LiveData<Boolean>
         get() = _isNotDataFoundShown
 
-    private var _eventNetworkErrorMessage = MutableLiveData<String>()
-    val eventNetworkErrorMessage: LiveData<String>
-        get() = _eventNetworkErrorMessage
-
     init {
         val collectorDao = VinylRoomDatabase.getDatabase(application).collectorsDao()
         collectorsRepository = CollectorRepository(application, collectorDao)

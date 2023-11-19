@@ -38,7 +38,7 @@ class CollectorFragment : Fragment(R.layout.collector_fragment) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = CollectorFragmentBinding.inflate(inflater, container, false)
 
         progressBar = binding.progressBar
