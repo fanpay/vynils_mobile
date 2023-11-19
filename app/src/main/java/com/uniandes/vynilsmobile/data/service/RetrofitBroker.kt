@@ -96,12 +96,31 @@ class RetrofitBroker {
         }
 
         // Collectors
-        suspend fun getAllCollectors (): List<Collector> {
-            val request = ApiClient.collectors.getAllCollectors()
-            return if (request.isSuccessful)
-                request.body() ?: listOf()
-            else
-                listOf()
+        suspend fun getCollectors(
+            onComplete: (resp: List<Collector>) -> Unit,
+            onError: (error: Throwable) -> Unit
+        ) {
+            try {
+                val response = ApiClient.collectors.getAllCollectors()
+                if (response.isSuccessful) {
+                    onComplete(response.body() ?: emptyList())
+                } else {
+                    onError(Exception("Error en la solicitud a la API: ${response.code()}"))
+                }
+            } catch (e: Throwable) {
+                onError(e)
+            }
+        }
+
+        suspend fun createCollector(collector: Collector): Collector? {
+            val request = ApiClient.collectors.createCollector(collector)
+            return if (request.isSuccessful) {
+                Log.e("SuccessCrearCollector", request.toString())
+                request.body()
+            } else {
+                Log.e("ErrorCrearCollector", request.toString())
+                null
+            }
         }
 
         suspend fun getAllComments (): List<Comment> {

@@ -10,10 +10,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.uniandes.vynilsmobile.R
-import androidx.navigation.fragment.findNavController
 import com.uniandes.vynilsmobile.data.model.Artist
 import com.uniandes.vynilsmobile.databinding.ArtistFragmentBinding
 import com.uniandes.vynilsmobile.view.adapters.ArtistsAdapter

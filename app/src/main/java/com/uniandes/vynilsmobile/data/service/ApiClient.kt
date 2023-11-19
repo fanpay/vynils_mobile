@@ -13,7 +13,6 @@ object ApiClient {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    //val albums: AlbumApi = retrofit.create(AlbumApi::class.java)
     val albums : AlbumApi by lazy {
         retrofit.create(AlbumApi::class.java)
     }

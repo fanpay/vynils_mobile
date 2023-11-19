@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.annotation.LayoutRes
+import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.data.model.Album
@@ -37,15 +40,14 @@ class AlbumsAdapter(private val progressBar: ProgressBar, private val onItemClic
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
         val album = asyncListDiffer.currentList[position]
-        holder.bind(album, onItemClick)
+        holder.bind(album)
 
-        if (itemCount > 0) {
-            progressBar.visibility = View.GONE
-        } else {
-            progressBar.visibility = View.VISIBLE
+        holder.viewDataBinding.album = album
+        holder.viewDataBinding.root.setOnClickListener {
+            onItemClick(album)
         }
 
-        holder.loadAlbumCover(album.cover)
+        progressBar.visibility = if(itemCount > 0) View.GONE else View.VISIBLE
     }
 
     override fun getItemCount(): Int {
@@ -53,34 +55,44 @@ class AlbumsAdapter(private val progressBar: ProgressBar, private val onItemClic
     }
 
 
-    class AlbumViewHolder(private val viewDataBinding: AlbumItemBinding) :
+    class AlbumViewHolder(val viewDataBinding: AlbumItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
         companion object {
             @LayoutRes
             val LAYOUT = R.layout.album_item
         }
 
-        fun bind(album: Album, onItemClick: (Album) -> Unit) {
-            viewDataBinding.album = album
-            viewDataBinding.root.setOnClickListener {
-                onItemClick(album)
-            }
-        }
-
-        fun loadAlbumCover(imageUrl: String) {
+        fun bind(album: Album) {
             Picasso.get()
-                .load(imageUrl)
+                .load(album.cover.toUri().buildUpon().scheme("https").build())
                 .placeholder(R.drawable.ic_baseline_album_24)
                 .error(R.drawable.ic_baseline_android_24)
                 .fit()
                 .centerCrop()
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .into(viewDataBinding.imageView1, object : Callback {
                     override fun onSuccess() {
                         return
                     }
-
                     override fun onError(e: Exception?) {
-                        Log.e("Picasso Error", "Error al cargar la imagen: ${e?.message}")
+                        Picasso.get()
+                            .load(album.cover.toUri().buildUpon().scheme("https").build())
+                            .placeholder(R.drawable.ic_baseline_album_24)
+                            .error(R.drawable.ic_baseline_android_24)
+                            .fit()
+                            .centerCrop()
+                            .memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
+                            .networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE)
+                            .into(viewDataBinding.imageView1, object : Callback {
+                                override fun onSuccess() {
+                                    return
+                                }
+                                override fun onError(e: Exception?) {
+                                    Log.e("Picasso Error", "Error al cargar la imagen: ${e?.message}")
+                                    viewDataBinding.imageView1.setImageResource(R.drawable.ic_baseline_android_24)
+                                    e?.printStackTrace()
+                                }
+                            })
                         return
                     }
                 })
@@ -88,7 +100,7 @@ class AlbumsAdapter(private val progressBar: ProgressBar, private val onItemClic
     }
     private class AlbumDiffCallback : DiffUtil.ItemCallback<Album>() {
         override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean {
-            return oldItem.albumId == newItem.albumId
+            return oldItem.id == newItem.id
         }
         override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean {
             return oldItem == newItem

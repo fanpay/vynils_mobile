@@ -40,4 +40,10 @@
             android:name="artist"
             app:argType="com.uniandes.vynilsmobile.data.model.Artist" />
     </fragment>
+    <fragment
+        android:id="@+id/collectorsFragment"
+        android:name="com.uniandes.vynilsmobile.view.CollectorFragment"
+        android:label="collector_fragment"
+        tools:layout="@layout/collector_fragment" >
+    </fragment>
 </navigation>

@@ -1,13 +1,10 @@
 package com.uniandes.vynilsmobile.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -20,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -30,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         // Make sure actions in the ActionBar get propagated to the NavController
-        setSupportActionBar(findViewById(com.uniandes.vynilsmobile.R.id.my_toolbar))
+        setSupportActionBar(findViewById(R.id.my_toolbar))
         setupActionBarWithNavController(navController)
 
         binding.bottomNavigation.setOnItemSelectedListener {
@@ -49,24 +47,16 @@ class MainActivity : AppCompatActivity() {
     private fun handleBottomNavigation(menuItemId: Int): Boolean {
         return when (menuItemId) {
             R.id.albumFragment -> {
-                // Limpiar el back stack antes de navegar al fragmento de álbumes
-                supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                navController.navigate(R.id.albumFragment)
                 true
             }
             R.id.artistFragment -> {
                 navController.navigate(R.id.artistFragment)
                 true
             }
-            R.id.page_coleccionistas -> {
-                val builder = AlertDialog.Builder(this)
-                builder.setTitle("Función no implementada")
-                builder.setMessage("Esta función aún no está implementada")
-                builder.setPositiveButton("Aceptar") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                val dialog = builder.create()
-                dialog.show()
-                false
+            R.id.collectorsFragment -> {
+                navController.navigate(R.id.collectorsFragment)
+                true
             }
             // Handle other menu items similarly
             else -> false
@@ -83,6 +73,19 @@ class MainActivity : AppCompatActivity() {
         } else {
             splashErrorLayout.visibility = View.GONE
             splashErrorLayoutErrorText.text = text
+        }
+    }
+
+    fun showNotDataFoundLayout(show: Boolean, text: String) {
+        val splashNotDataFoundLayout: ConstraintLayout = findViewById(R.id.splash_no_data_found_layout)
+        val splashNotDataFoundText: TextView = findViewById(R.id.textViewNotFoundData)
+
+        if (show) {
+            splashNotDataFoundLayout.visibility = View.VISIBLE
+            splashNotDataFoundText.text = text
+        } else {
+            splashNotDataFoundLayout.visibility = View.GONE
+            splashNotDataFoundText.text = text
         }
     }
 }
