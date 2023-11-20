@@ -45,7 +45,7 @@ class CollectorActivityTest {
     }
     @Test
     fun checkFirstTextInCollectorRecyclerView() {
-        Thread.sleep(500)
+        Thread.sleep(1000)
 
         onView(withIndex(withId(R.id.textView1), 0)).perform(scrollTo())
         onView(withIndex(withId(R.id.textView1), 0)).check(matches(isDisplayed()))
@@ -56,7 +56,7 @@ class CollectorActivityTest {
     }
     @Test
     fun checkSecondTextInCollectorRecyclerView() {
-        Thread.sleep(500)
+        Thread.sleep(1000)
 
         onView(withIndex(withId(R.id.textView2), 0)).perform(scrollTo())
         onView(withIndex(withId(R.id.textView2), 0)).check(matches(isDisplayed()))
