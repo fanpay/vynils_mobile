@@ -17,10 +17,6 @@ object ApiClient {
         retrofit.create(AlbumApi::class.java)
     }
 
-    val bands: BandApi by lazy {
-        retrofit.create(BandApi::class.java)
-    }
-
     val artists: ArtistApi by lazy {
         retrofit.create(ArtistApi::class.java)
     }

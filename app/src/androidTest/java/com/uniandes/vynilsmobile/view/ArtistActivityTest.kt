@@ -45,7 +45,7 @@ class ArtistActivityTest {
     }
     @Test
     fun checkFirstImageInArtistRecyclerView() {
-        Thread.sleep(500)
+        Thread.sleep(1000)
 
         onView(withIndex(withId(R.id.imageView1), 0)).perform(scrollTo())
         onView(withIndex(withId(R.id.imageView1), 0)).check(matches(isDisplayed()))
