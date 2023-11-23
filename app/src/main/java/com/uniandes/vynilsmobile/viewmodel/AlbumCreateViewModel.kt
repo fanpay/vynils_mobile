@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.uniandes.vynilsmobile.data.database.VinylRoomDatabase
 import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.data.repository.AlbumRepository
 import kotlinx.coroutines.launch
@@ -34,8 +33,7 @@ class AlbumCreateViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     init {
-        val albumDao = VinylRoomDatabase.getDatabase(application).albumsDao()
-        albumsRepository = AlbumRepository(application, albumDao)
+        albumsRepository = AlbumRepository(application)
     }
 
     fun saveAlbum(album: Album) {

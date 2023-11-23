@@ -18,7 +18,7 @@ class RetrofitBroker {
                 if (response.isSuccessful) {
                     onComplete(response.body() ?: emptyList())
                 } else {
-                    onError(Exception("Error en la solicitud a la API: ${response.code()}"))
+                    onError(Exception("getAlbums -> Error en la solicitud a la API: ${response.code()}"))
                 }
             } catch (e: Throwable) {
                 onError(e)
@@ -33,7 +33,7 @@ class RetrofitBroker {
                 if (response.isSuccessful) {
                     response.body()?.let { onComplete(it) }
                 } else {
-                    onError(Exception("Error en la solicitud a la API: ${response.code()}"))
+                    onError(Exception("createAlbum -> Error en la solicitud a la API: ${response.code()}"))
                 }
             } catch (e: Throwable) {
                 onError(e)
@@ -67,7 +67,7 @@ class RetrofitBroker {
                 if (response.isSuccessful) {
                     onComplete(response.body() ?: emptyList())
                 } else {
-                    onError(Exception("Error en la solicitud a la API: ${response.code()}"))
+                    onError(Exception("getCollectors -> Error en la solicitud a la API: ${response.code()}"))
                 }
             } catch (e: Throwable) {
                 onError(e)

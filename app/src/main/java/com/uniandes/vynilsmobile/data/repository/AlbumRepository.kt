@@ -7,6 +7,7 @@ import android.net.NetworkCapabilities
 import android.util.Log
 import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.data.database.AlbumsDao
+import com.uniandes.vynilsmobile.data.database.VinylRoomDatabase
 import com.uniandes.vynilsmobile.data.exceptions.ApiRequestException
 import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.data.service.RetrofitBroker
@@ -15,7 +16,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AlbumRepository(val application: Application, private val albumsDao: AlbumsDao) {
+class AlbumRepository(val application: Application) {
+    private val albumsDao: AlbumsDao by lazy {
+        VinylRoomDatabase.getDatabase(application).albumsDao()
+    }
+
     suspend fun getAllAlbums(): List<Album> {
         return withContext(Dispatchers.IO) {
 
