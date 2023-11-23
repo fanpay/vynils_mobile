@@ -48,6 +48,8 @@
     <string name="crear_button">Crear</string>
     <string name="agregar_album">Agregar álbum</string>
     <string name="crear_album_title">Crear Álbum</string>
+    <string name="telephone">Teléfono</string>
+    <string name="email">Email</string>
 
     <!-- DROPDOWN OPTIONS -->
     <string name="genero1">Salsa</string>
@@ -59,9 +61,5 @@
     <string name="etiqueta3">Discos Fuentes</string>
     <string name="etiqueta4">Elektra</string>
     <string name="etiqueta5">Fania Records</string>
-
-    <string name="description">Descripción</string>
-    <string name="telephone">Teléfono</string>
-    <string name="email">Email</string>
 
 </resources>
