@@ -4,7 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.data.model.Comment
@@ -13,10 +14,12 @@ import com.uniandes.vynilsmobile.databinding.CommentItemBinding
 
 class CommentsAdapter : RecyclerView.Adapter<CommentsAdapter.CommentViewHolder>(){
 
-    var comments :List<Comment> = emptyList()
+    private val asyncListDiffer = AsyncListDiffer(this, CommentDiffCallback())
+
+    private var comments: List<Comment>
+        get() = asyncListDiffer.currentList
         set(value) {
-            field = value
-            notifyDataSetChanged()
+            asyncListDiffer.submitList(value)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
@@ -30,13 +33,8 @@ class CommentsAdapter : RecyclerView.Adapter<CommentsAdapter.CommentViewHolder>(
 
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
         holder.viewDataBinding.also {
-            it.comment = comments[position]
+            it.comment = asyncListDiffer.currentList[position]
         }
-        /*holder.viewDataBinding.root.setOnClickListener {
-            val action = CommentFragmentDirections.actionCollectorFragmentToAlbumFragment()
-            // Navigate using that action
-            holder.viewDataBinding.root.findNavController().navigate(action)
-        }*/
     }
 
     override fun getItemCount(): Int {
@@ -49,6 +47,15 @@ class CommentsAdapter : RecyclerView.Adapter<CommentsAdapter.CommentViewHolder>(
         companion object {
             @LayoutRes
             val LAYOUT = R.layout.comment_item
+        }
+    }
+
+    private class CommentDiffCallback : DiffUtil.ItemCallback<Comment>() {
+        override fun areItemsTheSame(oldItem: Comment, newItem: Comment): Boolean {
+            return oldItem.commentId == newItem.commentId
+        }
+        override fun areContentsTheSame(oldItem: Comment, newItem: Comment): Boolean {
+            return oldItem == newItem
         }
     }
 }

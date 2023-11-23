@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.databinding.ActivityMainBinding
 
@@ -34,7 +34,9 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.my_toolbar))
         setupActionBarWithNavController(navController)
 
+        binding.bottomNavigation.setupWithNavController(navController)
         binding.bottomNavigation.setOnItemSelectedListener {
+            NavigationUI.onNavDestinationSelected(it, navController)
             handleBottomNavigation(
                 it.itemId
             )
@@ -47,17 +49,25 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Log.v("ERROR_MAIN", "onBackPressed")
+    }
+
     private fun handleBottomNavigation(menuItemId: Int): Boolean {
         return when (menuItemId) {
             R.id.albumFragment -> {
+                navController.popBackStack()
                 navController.navigate(R.id.albumFragment)
                 true
             }
             R.id.artistFragment -> {
+                navController.popBackStack()
                 navController.navigate(R.id.artistFragment)
                 true
             }
             R.id.collectorsFragment -> {
+                navController.popBackStack()
                 navController.navigate(R.id.collectorsFragment)
                 true
             }

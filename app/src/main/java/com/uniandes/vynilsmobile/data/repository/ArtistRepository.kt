@@ -68,7 +68,6 @@ class ArtistRepository(val application: Application, private val artistsDao: Art
         }
     }
 
-
     private suspend fun isNetworkAvailable(): Boolean = withContext(Dispatchers.IO) {
         val cm = application.baseContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = cm.activeNetwork
@@ -81,6 +80,6 @@ class ArtistRepository(val application: Application, private val artistsDao: Art
         Log.v("ArtistRepository", "Inserted ${artists.size} artists into the local database.")
     }
 
-    suspend fun createAlbum(artist: Artist) = RetrofitBroker.createArtist(artist)
+
 
 }

@@ -50,6 +50,7 @@ class ArtistViewModel(application: Application) :  AndroidViewModel(application)
     init {
         val artistsDao = VinylRoomDatabase.getDatabase(application).artistsDao()
         artistsRepository = ArtistRepository(application, artistsDao)
+
         refreshDataFromNetwork()
     }
 
@@ -78,6 +79,7 @@ class ArtistViewModel(application: Application) :  AndroidViewModel(application)
 
                 _eventNotDataFound.postValue(false)
                 _isNotDataFoundShown.postValue(false)
+
             }
 
         }

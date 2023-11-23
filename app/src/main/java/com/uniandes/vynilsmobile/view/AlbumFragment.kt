@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +19,7 @@ import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.databinding.AlbumFragmentBinding
 import com.uniandes.vynilsmobile.view.adapters.AlbumsAdapter
 import com.uniandes.vynilsmobile.viewmodel.AlbumViewModel
+
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -41,10 +43,14 @@ class AlbumFragment : Fragment(R.layout.album_fragment) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = AlbumFragmentBinding.inflate(inflater, container, false)
 
         progressBar = binding.progressBar
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+        }
+
         return binding.root
     }
 
@@ -54,6 +60,7 @@ class AlbumFragment : Fragment(R.layout.album_fragment) {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         val onItemClick: (Album) -> Unit = { album ->
+            //findNavController().popBackStack()
             val action = AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(album)
             findNavController().navigate(action)
         }

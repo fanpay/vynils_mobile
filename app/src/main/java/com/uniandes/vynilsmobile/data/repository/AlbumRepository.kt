@@ -79,6 +79,4 @@ class AlbumRepository(val application: Application, private val albumsDao: Album
         Log.v("AlbumRepository", "Inserted ${albums.size} albums into the local database.")
     }
 
-    suspend fun createAlbum(album: Album) = RetrofitBroker.createAlbum(album)
-
 }

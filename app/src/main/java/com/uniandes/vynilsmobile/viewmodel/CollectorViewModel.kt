@@ -9,14 +9,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.uniandes.vynilsmobile.data.database.VinylRoomDatabase
-import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.data.model.Collector
-import com.uniandes.vynilsmobile.data.repository.AlbumRepository
 import com.uniandes.vynilsmobile.data.repository.CollectorRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.coroutines.launch
 
 
 class CollectorViewModel(application: Application) :  AndroidViewModel(application) {
@@ -47,10 +44,6 @@ class CollectorViewModel(application: Application) :  AndroidViewModel(applicati
 
     val isNotDataFoundShown: LiveData<Boolean>
         get() = _isNotDataFoundShown
-
-    private var _eventNetworkErrorMessage = MutableLiveData<String>()
-    val eventNetworkErrorMessage: LiveData<String>
-        get() = _eventNetworkErrorMessage
 
     init {
         val collectorDao = VinylRoomDatabase.getDatabase(application).collectorsDao()

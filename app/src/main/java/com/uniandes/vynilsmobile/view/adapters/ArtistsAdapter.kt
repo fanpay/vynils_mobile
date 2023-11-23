@@ -66,7 +66,9 @@ class ArtistsAdapter(private val progressBar: ProgressBar, private val onItemCli
         fun bind(artist: Artist) {
             Picasso.get()
                 .load(artist.image.toUri().buildUpon().scheme("https").build())
+
                 .placeholder(R.drawable.ic_baseline_person_24)
+
                 .error(R.drawable.ic_baseline_android_24)
                 .fit()
                 .centerCrop()

@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.uniandes.vynilsmobile.R
@@ -40,7 +41,7 @@ class ArtistFragment : Fragment(R.layout.artist_fragment) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = ArtistFragmentBinding.inflate(inflater, container, false)
 
         progressBar = binding.progressBar
@@ -53,7 +54,9 @@ class ArtistFragment : Fragment(R.layout.artist_fragment) {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
 
-        val onItemClick: (Artist) -> Unit = {
+        val onItemClick: (Artist) -> Unit = { artist ->
+            val action = ArtistFragmentDirections.actionArtistFragmentToArtistDetailFragment(artist)
+            findNavController().navigate(action)
         }
 
         artistAdapter = ArtistsAdapter(progressBar, onItemClick)
