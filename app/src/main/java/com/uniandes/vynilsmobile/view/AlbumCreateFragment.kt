@@ -33,8 +33,10 @@ class AlbumCreateFragment : Fragment() {
     ): View {
         _binding = AlbumFragmentCreateBinding.inflate(inflater, container, false)
 
-        val datePickerField: EditText = binding.editFechaEstrenoAlbum
+        val bar = (activity as? AppCompatActivity)?.supportActionBar
+        bar?.title = getString(R.string.title_create_album)
 
+        val datePickerField: EditText = binding.editFechaEstrenoAlbum
         datePickerField.setOnClickListener {
             onDatePickerFieldClick(it)
         }
