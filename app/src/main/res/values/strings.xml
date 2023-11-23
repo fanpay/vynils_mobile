@@ -7,6 +7,7 @@
     <string name="title_collectors">Coleccionistas</string>
     <string name="title_detail_album">Detalle del álbum</string>
     <string name="title_detail_artist">Detalle del artista</string>
+    <string name="title_detail_collector">Detalle del colector</string>
     <string name="title_albums_bnb">Álbumes</string>
     <string name="title_artists_bnb">Artistas</string>
     <string name="title_collectors_bnb">Coleccionistas</string>
@@ -19,5 +20,7 @@
     <string name="launch_date">Fecha de lanzamiento:</string>
     <string name="genre">Género:</string>
     <string name="year_birth">Año de nacimiento:</string>
+    <string name="telephone">Teléfono:</string>
+    <string name="email">Email:</string>
 
 </resources>
