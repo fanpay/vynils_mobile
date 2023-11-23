@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.uniandes.vynilsmobile.R
@@ -50,7 +51,10 @@ class CollectorFragment : Fragment(R.layout.collector_fragment) {
         recyclerView = binding.collectorsRv
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        val onItemClick: (Collector) -> Unit = {
+        val onItemClick: (Collector) -> Unit = {collector ->
+            //findNavController().popBackStack()
+            val action = CollectorFragmentDirections.actionCollectorFragmentToCollectorDetailFragment(collector)
+            findNavController().navigate(action)
 
         }
 
