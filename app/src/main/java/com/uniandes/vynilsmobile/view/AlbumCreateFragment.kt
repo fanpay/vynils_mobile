@@ -19,11 +19,6 @@ import com.uniandes.vynilsmobile.viewmodel.AlbumCreateViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AlbumCreateFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AlbumCreateFragment : Fragment() {
 
     private var _binding: AlbumFragmentCreateBinding? = null
@@ -38,7 +33,7 @@ class AlbumCreateFragment : Fragment() {
     ): View {
         _binding = AlbumFragmentCreateBinding.inflate(inflater, container, false)
 
-        var datePickerField: EditText = binding.editFechaEstrenoAlbum
+        val datePickerField: EditText = binding.editFechaEstrenoAlbum
 
         datePickerField.setOnClickListener {
             onDatePickerFieldClick(it)
@@ -58,6 +53,31 @@ class AlbumCreateFragment : Fragment() {
             val albumGenre = binding.albumGeneros.selectedItem.toString()
             val albumRecordLabel = binding.etiquetasGrabaciones.selectedItem.toString()
 
+            // Verificar que los campos obligatorios no estén vacíos
+            if (albumName.isEmpty()) {
+                binding.editNombreAlbum.error = "El campo nombre es obligatorio"
+                return@setOnClickListener
+            }
+            // Verificar que los campos de texto tengan la longitud adecuada
+            if (albumName.length < 5 || albumName.length > 50) {
+                binding.editNombreAlbum.error = "El campo nombre debe tener entre 5 y 50 caracteres"
+                return@setOnClickListener
+            }
+
+            if (albumDescription.isEmpty()) {
+                binding.editDescripcionAlbum.error = "El campo descripción es obligatorio"
+                return@setOnClickListener
+            }
+            if (albumDescription.length < 5 || albumDescription.length > 50) {
+                binding.editDescripcionAlbum.error = "El campo descripción debe tener entre 5 y 50 caracteres"
+                return@setOnClickListener
+            }
+
+            if (albumCover.isEmpty()) {
+                binding.editCoverAlbum.error = "El campo cover es obligatorio"
+                return@setOnClickListener
+            }
+
             // Verificar que se haya seleccionado una fecha
             if (!dateSelected) {
                 binding.editFechaEstrenoAlbum.error = "Campo fecha obligatorio"
@@ -66,34 +86,9 @@ class AlbumCreateFragment : Fragment() {
                 binding.editFechaEstrenoAlbum.error = null
             }
 
-            // Verificar que los campos obligatorios no estén vacíos
-            if (albumName.isEmpty()) {
-                binding.editNombreAlbum.error = "El campo nombre es obligatorio"
-                return@setOnClickListener
-            }
-            if (albumCover.isEmpty()) {
-                binding.editCoverAlbum.error = "El campo cover es obligatorio"
-                return@setOnClickListener
-            }
-            if (albumDescription.isEmpty()) {
-                binding.editDescripcionAlbum.error = "El campo descripción es obligatorio"
-                return@setOnClickListener
-            }
+            val dbDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            val albumDate = dbDateFormat.format(selectedDate.time)
 
-            // Verificar que los campos de texto tengan la longitud adecuada
-            if (albumName.length < 5 || albumName.length > 50) {
-                binding.editNombreAlbum.error = "El campo nombre debe tener entre 5 y 50 caracteres"
-                return@setOnClickListener
-            }
-            if (albumDescription.length < 5 || albumDescription.length > 50) {
-                binding.editDescripcionAlbum.error = "El campo descripción debe tener entre 5 y 50 caracteres"
-                return@setOnClickListener
-            }
-
-
-            val albumDateFormat = SimpleDateFormat("yyyy-MM-dd")
-            val albumDate = albumDateFormat.format(selectedDate.time) + "T00:00:00-05:00"
-            // Crear un objeto Album a partir de los valores ingresados
             val album = Album(
                 name = albumName,
                 cover = albumCover,
@@ -153,7 +148,9 @@ class AlbumCreateFragment : Fragment() {
         val datePickerDialog = DatePickerDialog(view.context,
             { _, selectedYear, selectedMonth, selectedDayOfMonth ->
                 selectedDate.set(selectedYear, selectedMonth, selectedDayOfMonth)
-                (view as EditText).setText("$selectedDayOfMonth-${selectedMonth + 1}-$selectedYear")
+                (view as EditText).setText(
+                    String.format(getString(R.string.date_format), selectedYear, selectedMonth + 1, selectedDayOfMonth)
+                )
                 dateSelected = true
             }, year, month, day)
 

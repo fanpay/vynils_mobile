@@ -95,12 +95,11 @@
             <EditText
                 android:id="@+id/editFechaEstrenoAlbum"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="none"
                 android:focusable="false"
-                android:clickable="true"
                 android:hint="@string/fecha_estreno_desc"
                 android:autofillHints="fecha estreno"/>
 

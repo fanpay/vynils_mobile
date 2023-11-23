@@ -55,7 +55,8 @@
             app:layout_constraintBottom_toTopOf="@id/textViewError"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/error_image_description"/>
 
         <TextView
             android:id="@+id/textViewError"
@@ -85,7 +86,8 @@
             app:layout_constraintBottom_toTopOf="@id/textViewNotFoundData"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/not_data_found"/>
 
         <TextView
             android:id="@+id/textViewNotFoundData"
