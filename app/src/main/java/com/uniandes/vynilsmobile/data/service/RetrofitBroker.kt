@@ -25,6 +25,21 @@ class RetrofitBroker {
             }
         }
 
+        suspend fun createAlbum(album: Album,
+                                onComplete: (resp: Album) -> Unit,
+                                onError: (error: Throwable) -> Unit) {
+            try {
+                val response = ApiClient.albums.createAlbum(album)
+                if (response.isSuccessful) {
+                    response.body()?.let { onComplete(it) }
+                } else {
+                    onError(Exception("Error en la solicitud a la API: ${response.code()}"))
+                }
+            } catch (e: Throwable) {
+                onError(e)
+            }
+        }
+
         // Artists
         suspend fun getArtists(
             onComplete: (resp: List<Artist>) -> Unit,
