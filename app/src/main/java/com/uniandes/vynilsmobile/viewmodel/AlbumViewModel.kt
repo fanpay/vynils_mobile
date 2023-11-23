@@ -8,12 +8,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.uniandes.vynilsmobile.data.database.VinylRoomDatabase
 import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.data.repository.AlbumRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 class AlbumViewModel(application: Application) :  AndroidViewModel(application) {
@@ -46,40 +43,39 @@ class AlbumViewModel(application: Application) :  AndroidViewModel(application) 
         get() = _isNotDataFoundShown
 
     init {
-        val albumDao = VinylRoomDatabase.getDatabase(application).albumsDao()
-        albumsRepository = AlbumRepository(application, albumDao)
+        albumsRepository = AlbumRepository(application)
         refreshDataFromNetwork()
     }
 
     private fun refreshDataFromNetwork() {
-        viewModelScope.launch (Dispatchers.IO){
-            try{
-                withContext(Dispatchers.Main){
-                    val data = albumsRepository.getAllAlbums()
-                    _albums.value = data
+        viewModelScope.launch{
+            try {
+                val data = albumsRepository.getAllAlbums()
+                _albums.value = data
 
-                    if(data.isEmpty()){
-                        _eventNotDataFound.postValue(true)
-                        _isNotDataFoundShown.postValue(true)
-                    }
-                    else{
-                        _eventNotDataFound.postValue(false)
-                        _isNotDataFoundShown.postValue(false)
-                    }
-                }
-                _eventNetworkError.postValue(false)
-                _isNetworkErrorShown.postValue(false)
-            }
-            catch (e:Exception){
+                checkDataAndSetFlags(data)
+            } catch (e: Exception) {
                 Log.e("refreshDataFromNetwork", e.toString())
                 _eventNetworkError.postValue(true)
-
                 _eventNotDataFound.postValue(false)
                 _isNotDataFoundShown.postValue(false)
             }
-
         }
     }
+
+    private fun checkDataAndSetFlags(data: List<Album>) {
+        if (data.isEmpty()) {
+            _eventNotDataFound.postValue(true)
+            _isNotDataFoundShown.postValue(true)
+        } else {
+            _eventNotDataFound.postValue(false)
+            _isNotDataFoundShown.postValue(false)
+        }
+
+        _eventNetworkError.postValue(false)
+        _isNetworkErrorShown.postValue(false)
+    }
+
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
     }

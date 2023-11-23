@@ -8,7 +8,7 @@ import com.uniandes.vynilsmobile.data.model.Album
 
 @Dao
 interface AlbumsDao {
-    @Query("SELECT * FROM albums_table ORDER BY id ASC")
+    @Query("SELECT * FROM albums_table ORDER BY id DESC")
     fun getAlbums(): List<Album>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
