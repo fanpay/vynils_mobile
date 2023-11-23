@@ -33,9 +33,6 @@ class AlbumCreateFragment : Fragment() {
     ): View {
         _binding = AlbumFragmentCreateBinding.inflate(inflater, container, false)
 
-        val bar = (activity as? AppCompatActivity)?.supportActionBar
-        bar?.title = getString(R.string.title_create_album)
-
         val datePickerField: EditText = binding.editFechaEstrenoAlbum
         datePickerField.setOnClickListener {
             onDatePickerFieldClick(it)
@@ -110,8 +107,8 @@ class AlbumCreateFragment : Fragment() {
             "You can only access the viewModel after onActivityCreated()"
         }
 
-        val bar = (activity as AppCompatActivity).supportActionBar
-        bar?.title = getString(R.string.title_albums)
+        val bar = (activity as? AppCompatActivity)?.supportActionBar
+        bar?.title = getString(R.string.title_create_album)
 
         viewModel = ViewModelProvider(this, AlbumCreateViewModel.Factory(activity.application))[AlbumCreateViewModel::class.java]
         viewModel.album.observe(viewLifecycleOwner) { album ->
