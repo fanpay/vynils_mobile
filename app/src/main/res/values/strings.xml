@@ -59,16 +59,8 @@
     <string name="etiqueta4">Elektra</string>
     <string name="etiqueta5">Fania Records</string>
 
-    <string name="error_network_connection">Error de comunicación</string>
-    <string name="error_retrieve_albums">Error obteniendo álbumes</string>
-    <string name="error_retrieve_collectors">Error obteniendo colectores</string>
-    <string name="not_data_found">No se encontraron datos</string>
-    <string name="description">Descripción:</string>
-    <string name="launch_date">Fecha de lanzamiento:</string>
-    <string name="genre">Género:</string>
-    <string name="year_birth">Año de nacimiento:</string>
-    <string name="telephone">Teléfono:</string>
-    <string name="email">Email:</string>
-
+    <string name="description">Descripción</string>
+    <string name="telephone">Teléfono</string>
+    <string name="email">Email</string>
 
 </resources>
