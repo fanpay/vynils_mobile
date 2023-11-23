@@ -23,10 +23,11 @@
     <string name="title_collectors">Coleccionistas</string>
     <string name="title_detail_album">Detalle del álbum</string>
     <string name="title_detail_artist">Detalle del artista</string>
+    <string name="title_detail_collector">Detalle del colector</string>
     <string name="title_albums_bnb">Álbumes</string>
     <string name="title_artists_bnb">Artistas</string>
     <string name="title_collectors_bnb">Coleccionistas</string>
-
+  
     <string name="description_label">Descripción</string>
     <string name="launch_date">Fecha de lanzamiento</string>
     <string name="genre">Género</string>
@@ -56,5 +57,17 @@
     <string name="etiqueta3">Discos Fuentes</string>
     <string name="etiqueta4">Elektra</string>
     <string name="etiqueta5">Fania Records</string>
+
+    <string name="error_network_connection">Error de comunicación</string>
+    <string name="error_retrieve_albums">Error obteniendo álbumes</string>
+    <string name="error_retrieve_collectors">Error obteniendo colectores</string>
+    <string name="not_data_found">No se encontraron datos</string>
+    <string name="description">Descripción:</string>
+    <string name="launch_date">Fecha de lanzamiento:</string>
+    <string name="genre">Género:</string>
+    <string name="year_birth">Año de nacimiento:</string>
+    <string name="telephone">Teléfono:</string>
+    <string name="email">Email:</string>
+
 
 </resources>
