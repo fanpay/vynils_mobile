@@ -16,29 +16,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/artistName"
+                android:id="@+id/collectorName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:padding="30dp"
-                tools:text="Rubén Blades Bellido de Luna"
+                tools:text="Manolo Bellon"
                 android:gravity="center" />
-
-            <LinearLayout
-                android:id="@+id/layout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/artistImage"
-                    android:layout_width="250dp"
-                    android:layout_height="250dp"
-                    android:contentDescription="@string/artist_profile_image_alt" />
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,16 +32,16 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/descriptionLabel"
+                    android:id="@+id/telephoneLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="25sp"
                     android:layout_marginBottom="12dp"
                     android:textStyle="bold"
-                    android:text="@string/description_label" />
+                    android:text="@string/telephone" />
 
                 <TextView
-                    android:id="@+id/tvDescription"
+                    android:id="@+id/tvTelephone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
@@ -65,16 +50,16 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/birthDate"
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="25sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="12dp"
-                    android:text="@string/year_birth" />
+                    android:text="@string/email" />
 
                 <TextView
-                    android:id="@+id/tvBirthDate"
+                    android:id="@+id/tvEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start|end"

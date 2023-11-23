@@ -37,7 +37,8 @@
                 <ImageView
                     android:id="@+id/albumImage"
                     android:layout_width="250dp"
-                    android:layout_height="250dp" />
+                    android:layout_height="250dp"
+                    android:contentDescription="@string/album_cover_image_alt"/>
 
             </LinearLayout>
 
@@ -54,7 +55,7 @@
                     android:textSize="25sp"
                     android:layout_marginBottom="12dp"
                     android:textStyle="bold"
-                    android:text="@string/description" />
+                    android:text="@string/description_label" />
 
                 <TextView
                     android:id="@+id/tvDescription"

@@ -7,6 +7,7 @@ import android.net.NetworkCapabilities
 import android.util.Log
 import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.data.database.AlbumsDao
+import com.uniandes.vynilsmobile.data.database.VinylRoomDatabase
 import com.uniandes.vynilsmobile.data.exceptions.ApiRequestException
 import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.data.service.RetrofitBroker
@@ -15,7 +16,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AlbumRepository(val application: Application, private val albumsDao: AlbumsDao) {
+class AlbumRepository(val application: Application) {
+    private val albumsDao: AlbumsDao by lazy {
+        VinylRoomDatabase.getDatabase(application).albumsDao()
+    }
+
     suspend fun getAllAlbums(): List<Album> {
         return withContext(Dispatchers.IO) {
 
@@ -66,6 +71,38 @@ class AlbumRepository(val application: Application, private val albumsDao: Album
         }
     }
 
+    suspend fun createAlbum(album: Album,
+                            onComplete: (resp: Album) -> Unit,
+                            onError: (error: Throwable) -> Unit) {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = RetrofitBroker.createAlbum(
+                    album,
+                    onComplete = { response ->
+                        CoroutineScope(Dispatchers.IO).launch {
+                            insertAlbumIntoDatabase(response)
+                        }
+                        onComplete(response)
+                    },
+                    onError = { error ->
+                        throw ApiRequestException(
+                            application.resources.getString(
+                                R.string.error_retrieve_albums
+                            ), error
+                        )
+                    }
+                )
+
+                return@withContext response
+            } catch (e: Throwable) {
+                Log.e("AlbumRepository", "Error creating album from API: ${e.message}")
+                throw ApiRequestException(
+                    application.resources.getString(R.string.error_save_album),
+                    e
+                )
+            }
+        }
+    }
 
     private suspend fun isNetworkAvailable(): Boolean = withContext(Dispatchers.IO) {
         val cm = application.baseContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -79,4 +116,8 @@ class AlbumRepository(val application: Application, private val albumsDao: Album
         Log.v("AlbumRepository", "Inserted ${albums.size} albums into the local database.")
     }
 
+    private suspend fun insertAlbumIntoDatabase(album: Album) {
+        albumsDao.insert(album)
+        Log.v("AlbumRepository", "Inserted 1 album into the local database. ID ${album.id}")
+    }
 }

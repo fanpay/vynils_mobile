@@ -1,25 +1,67 @@
 <resources>
     <string name="app_name">Vynils Mobile</string>
 
+    <!-- DATE FORMATS -->
+    <string name="date_format">%d-%02d-%02d</string>
+
+    <!-- ERROR MESSAGES -->
+    <string name="error_image_description">Imagen de error, el sistema Android tiene un problema</string>
+    <string name="error_network_connection">Error de comunicación</string>
+    <string name="error_retrieve_albums">Error obteniendo álbumes</string>
+    <string name="error_save_album">Error creando álbum</string>
+    <string name="error_retrieve_collectors">Error obteniendo colectores</string>
+    <string name="not_data_found">No se encontraron datos</string>
     <string name="txt_no_comments">No hay comentarios para este álbum</string>
+    <string name="error_retrieve_artists">Error obteniendo artistas</string>
+
+    <!-- ACCESSIBILITY TEXT -->
+    <string name="album_cover_image_alt">Imagen de portada para el álbum</string>
+    <string name="artist_profile_image_alt">Fotografía del artista</string>
+
+
     <string name="title_albums">Álbumes</string>
     <string name="title_artists">Artistas</string>
     <string name="title_collectors">Coleccionistas</string>
+    <string name="title_create_album">Crear álbum</string>
     <string name="title_detail_album">Detalle del álbum</string>
     <string name="title_detail_artist">Detalle del artista</string>
+    <string name="title_detail_collector">Detalle del colector</string>
     <string name="title_albums_bnb">Álbumes</string>
     <string name="title_artists_bnb">Artistas</string>
     <string name="title_collectors_bnb">Coleccionistas</string>
-    <string name="error_network_connection">Error de comunicación</string>
-    <string name="error_retrieve_albums">Error obteniendo álbumes</string>
-    <string name="error_retrieve_collectors">Error obteniendo colectores</string>
-    <string name="error_retrieve_bands">Error obteniendo bandas</string>
-    <string name="not_data_found">No se encontraron datos</string>
-    <string name="error_retrieve_artists">Error obteniendo artistas</string>
-    <string name="description">Descripción:</string>
-    <string name="launch_date">Fecha de lanzamiento:</string>
-    <string name="genre">Género:</string>
-    <string name="year_birth">Año de nacimiento:</string>
+  
+    <string name="description_label">Descripción</string>
+    <string name="launch_date">Fecha de lanzamiento</string>
+    <string name="genre">Género</string>
+    <string name="year_birth">Año de nacimiento</string>
 
+    <string name="nombre_label">Nombre</string>
+    <string name="cover_label">URL imagen</string>
+    <string name="genero_label">Género</string>
+    <string name="disquera_label">Disquera</string>
+    <string name="fecha_estreno_label">Fecha Estreno</string>
+    <string name="nombre_desc">Ingrese el nombre</string>
+    <string name="cover_desc">Ingrese la URL de la imagen</string>
+    <string name="descripcion_desc">Ingrese la descripción</string>
+    <string name="fecha_estreno_desc">Ingrese la fecha de estreno</string>
+    <string name="genero_desc">Ingrese el género musical</string>
+    <string name="crear_button">Crear</string>
+    <string name="agregar_album">Agregar álbum</string>
+    <string name="crear_album_title">Crear Álbum</string>
+
+    <!-- DROPDOWN OPTIONS -->
+    <string name="genero1">Salsa</string>
+    <string name="genero2">Rock</string>
+    <string name="genero3">Folk</string>
+    <string name="genero4">Classical</string>
+    <string name="etiqueta1">Sony Music</string>
+    <string name="etiqueta2">EMI</string>
+    <string name="etiqueta3">Discos Fuentes</string>
+    <string name="etiqueta4">Elektra</string>
+    <string name="etiqueta5">Fania Records</string>
+
+    <string name="description">Descripción</string>
+    <string name="telephone">Teléfono</string>
+    <string name="email">Email</string>
 
 </resources>
