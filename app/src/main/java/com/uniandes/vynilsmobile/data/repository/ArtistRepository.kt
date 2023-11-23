@@ -6,10 +6,9 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
 import com.uniandes.vynilsmobile.R
-import com.uniandes.vynilsmobile.data.database.AlbumsDao
 import com.uniandes.vynilsmobile.data.database.ArtistsDao
+import com.uniandes.vynilsmobile.data.database.VinylRoomDatabase
 import com.uniandes.vynilsmobile.data.exceptions.ApiRequestException
-import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.data.model.Artist
 import com.uniandes.vynilsmobile.data.service.RetrofitBroker
 import kotlinx.coroutines.CoroutineScope
@@ -17,7 +16,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ArtistRepository(val application: Application, private val artistsDao: ArtistsDao) {
+class ArtistRepository(val application: Application) {
+    private val artistsDao: ArtistsDao by lazy {
+        VinylRoomDatabase.getDatabase(application).artistsDao()
+    }
     suspend fun getAllArtists(): List<Artist> {
         return withContext(Dispatchers.IO) {
 

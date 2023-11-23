@@ -8,10 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.uniandes.vynilsmobile.data.database.VinylRoomDatabase
-import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.data.model.Artist
-import com.uniandes.vynilsmobile.data.repository.AlbumRepository
 import com.uniandes.vynilsmobile.data.repository.ArtistRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -48,9 +45,7 @@ class ArtistViewModel(application: Application) :  AndroidViewModel(application)
         get() = _isNotDataFoundShown
 
     init {
-        val artistsDao = VinylRoomDatabase.getDatabase(application).artistsDao()
-        artistsRepository = ArtistRepository(application, artistsDao)
-
+        artistsRepository = ArtistRepository(application)
         refreshDataFromNetwork()
     }
 
