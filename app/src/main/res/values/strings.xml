@@ -12,6 +12,7 @@
     <string name="error_retrieve_collectors">Error obteniendo colectores</string>
     <string name="not_data_found">No se encontraron datos</string>
     <string name="txt_no_comments">No hay comentarios para este álbum</string>
+    <string name="error_retrieve_artists">Error obteniendo artistas</string>
 
     <!-- ACCESSIBILITY TEXT -->
     <string name="album_cover_image_alt">Imagen de portada para el álbum</string>
@@ -47,6 +48,8 @@
     <string name="crear_button">Crear</string>
     <string name="agregar_album">Agregar álbum</string>
     <string name="crear_album_title">Crear Álbum</string>
+    <string name="telephone">Teléfono</string>
+    <string name="email">Email</string>
 
     <!-- DROPDOWN OPTIONS -->
     <string name="genero1">Salsa</string>
@@ -58,9 +61,5 @@
     <string name="etiqueta3">Discos Fuentes</string>
     <string name="etiqueta4">Elektra</string>
     <string name="etiqueta5">Fania Records</string>
-
-    <string name="description">Descripción</string>
-    <string name="telephone">Teléfono</string>
-    <string name="email">Email</string>
 
 </resources>
