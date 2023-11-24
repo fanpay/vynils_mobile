@@ -72,7 +72,7 @@ class ArtistFragment : Fragment(R.layout.artist_fragment) {
         }
 
         val bar = (activity as AppCompatActivity).supportActionBar
-        bar?.title = getString(R.string.title_artists)
+        bar?.title = getString(R.string.title_vista_artists)
 
         viewModel = ViewModelProvider(this, ArtistViewModel.Factory(activity.application))[ArtistViewModel::class.java]
         viewModel.artists.observe(viewLifecycleOwner) { artists ->
