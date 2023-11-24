@@ -35,19 +35,21 @@
                     android:src="@{album.cover}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/album_cover_image_alt"/>
+                    android:contentDescription="@{@string/album_cover_image_alt + album.name}"/>
 
                 <TextView
                     android:id="@+id/textView1"
-                    android:layout_width="218dp"
-                    android:layout_height="72dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
                     android:gravity="center"
                     android:text="@{album.name}"
                     android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/imageView1"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.8"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View

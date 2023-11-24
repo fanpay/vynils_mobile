@@ -42,7 +42,7 @@ public class TestMainActivity{
 
     @Test
     public void testToolbarTitle() {
-        String expectedTitle = getApplicationContext().getResources().getString(R.string.title_albums);
+        String expectedTitle = getApplicationContext().getResources().getString(R.string.title_vista_albums);
         onView(withId(R.id.my_toolbar)).check(matches(isDisplayed()));
         onView(isAssignableFrom(Toolbar.class))
                 .check(matches(withToolbarTitle(expectedTitle)));
