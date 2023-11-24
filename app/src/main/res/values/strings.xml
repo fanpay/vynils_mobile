@@ -24,6 +24,7 @@
     <string name="title_artists">Artistas</string>
     <string name="title_vista_artists">Vista Artistas</string>
     <string name="title_collectors">Coleccionistas</string>
+    <string name="title_vista_collectors">Vista Coleccionistas</string>
     <string name="title_create_album">Crear álbum</string>
     <string name="title_detail_album">Detalle del álbum</string>
     <string name="title_detail_artist">Detalle del artista</string>
