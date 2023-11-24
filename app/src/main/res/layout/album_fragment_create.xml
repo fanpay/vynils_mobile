@@ -19,9 +19,9 @@
                 android:id="@+id/crearAlbumLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/black"
                 android:text="@string/crear_album_title"
                 tools:text="@string/crear_album_title"
                 android:gravity="center" />
@@ -38,11 +38,12 @@
             <EditText
                 android:id="@+id/editNombreAlbum"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:ems="10"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
                 android:inputType="text"
                 android:hint="@string/nombre_desc"
-                android:autofillHints="nombre"/>
+                android:autofillHints="nombre"
+                android:minHeight="48dp"/>
 
             <TextView
                 android:id="@+id/descriptionLabel"
@@ -56,13 +57,14 @@
             <EditText
                 android:id="@+id/editDescripcionAlbum"
                 android:layout_width="match_parent"
-                android:layout_height="248dp"
-                android:ems="10"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
                 android:maxLength="300"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
                 android:hint="@string/descripcion_desc"
-                android:autofillHints="description"/>
+                android:autofillHints="description"
+                android:minHeight="248dp"/>
 
             <TextView
                 android:id="@+id/coverLabel"
@@ -77,11 +79,12 @@
             <EditText
                 android:id="@+id/editCoverAlbum"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:ems="10"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
                 android:inputType="text"
                 android:hint="@string/cover_desc"
-                android:autofillHints="nombre"/>
+                android:autofillHints="nombre"
+                android:minHeight="48dp"/>
 
             <TextView
                 android:id="@+id/fechaEstrenoLabel"
@@ -97,11 +100,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:ems="10"
+                android:textSize="17sp"
                 android:inputType="none"
                 android:focusable="false"
                 android:hint="@string/fecha_estreno_desc"
-                android:autofillHints="fecha estreno"/>
+                android:autofillHints="fecha estreno"
+                android:minHeight="48dp"/>
 
             <TextView
                 android:id="@+id/generoLabel"
@@ -116,10 +120,11 @@
             <Spinner
                 android:id="@+id/albumGeneros"
                 android:layout_width="fill_parent"
-                android:layout_height="58dp"
+                android:layout_height="wrap_content"
                 android:entries="@array/generos"
                 android:prompt="@string/genero_desc"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:minHeight="58dp"/>
 
             <TextView
                 android:id="@+id/disqueraLabel"
@@ -134,10 +139,11 @@
             <Spinner
                 android:id="@+id/etiquetasGrabaciones"
                 android:layout_width="fill_parent"
-                android:layout_height="58dp"
+                android:layout_height="wrap_content"
                 android:entries="@array/etiquetasGrabacion"
                 android:prompt="@string/disquera_label"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:minHeight="58dp"/>
 
             <Button
                 android:id="@+id/btnCrearAlbum"
