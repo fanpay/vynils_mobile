@@ -35,7 +35,7 @@
                     android:src="@{artist.image}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@{@string/artist_profile_image_alt + artist.name}"/>
+                    android:contentDescription="@{@string/artist_profile_image_alt + artist.artistId + artist.name}"/>
 
                 <TextView
                     android:id="@+id/textView1"
