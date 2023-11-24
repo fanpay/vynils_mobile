@@ -13,7 +13,6 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
     </style>
     <style name="Theme.VynilsMobile.NoActionBar">
         <item name="windowActionBar">false</item>

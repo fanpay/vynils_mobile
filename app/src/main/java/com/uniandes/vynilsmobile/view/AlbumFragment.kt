@@ -81,7 +81,7 @@ class AlbumFragment : Fragment(R.layout.album_fragment) {
         }
 
         val bar = (activity as AppCompatActivity).supportActionBar
-        bar?.title = getString(R.string.title_albums)
+        bar?.title = getString(R.string.title_vista_albums)
 
         viewModel = ViewModelProvider(this, AlbumViewModel.Factory(activity.application))[AlbumViewModel::class.java]
         viewModel.albums.observe(viewLifecycleOwner) { albums ->

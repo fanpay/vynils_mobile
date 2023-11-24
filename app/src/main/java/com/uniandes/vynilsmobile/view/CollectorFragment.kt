@@ -69,9 +69,8 @@ class CollectorFragment : Fragment(R.layout.collector_fragment) {
         }
 
         val bar = (activity as AppCompatActivity).supportActionBar
-        bar?.title = getString(R.string.title_collectors)
+        bar?.title = getString(R.string.title_vista_collectors)
 
-        activity.actionBar?.title = getString(R.string.title_collectors)
         viewModel = ViewModelProvider(this, CollectorViewModel.Factory(activity.application))[CollectorViewModel::class.java]
         viewModel.collectors.observe(viewLifecycleOwner) { collectors ->
             collectorAdapter?.collectors = collectors
