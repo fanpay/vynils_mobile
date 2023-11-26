@@ -72,22 +72,24 @@ class RetrofitBroker {
                 }
             } catch (e: Throwable) {
                 onError(e)
+            }
+        }
         // Comentarios
-        suspend fun addComment(comment: Comment,
-             onComplete: (resp: Comment) -> Unit,
-             onError: (error: Throwable) -> Unit) {
+        suspend fun addComment(
+                albumId:Int,
+                comment: Comment,
+                onComplete: (resp: Comment) -> Unit,
+                onError: (error: Throwable) -> Unit
+        ) {
              try {
-                 val response = ApiClient.comments.addComment(comment)
+                 val response = ApiClient.comments.addComment(albumId, comment)
                  if (response.isSuccessful) {
                      response.body()?.let { onComplete(it) }
                  } else {
-                     onError(Exception("addComment -> Error en la solicitud a la API: ${response.code()}"))
+                     onError(Exception("addComment -> Error en la solicitud a la API: ${response.code()} - ${response.raw()} - ${response.body()}"))
                  }
              } catch (e: Throwable) {
                  onError(e)
-
-                    }
-                }
             }
         }
     }

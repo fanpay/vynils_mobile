@@ -61,7 +61,7 @@ class AlbumDetailFragment : Fragment() {
         // Configuración del clic del botón "Comentar"
         binding.commentButton.setOnClickListener {
             // Aquí debes navegar al fragmento de comentarios
-            val action = AlbumDetailFragmentDirections.actionAlbumDetailFragmentToCommentCreateFragment()
+            val action = AlbumDetailFragmentDirections.actionAlbumDetailFragmentToCommentCreateFragment(args.album)
             findNavController().navigate(action)
         }
     }

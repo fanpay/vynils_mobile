@@ -10,7 +10,7 @@ data class Collector (
     @PrimaryKey
     @SerializedName("id")
     val collectorId: Int,
-    val name:String,
-    val telephone:String,
-    val email:String
+    val name:String? = null,
+    val telephone:String? = null,
+    val email:String? = null
 ): Serializable
