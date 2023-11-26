@@ -67,23 +67,6 @@
                     android:textSize="18sp"
                     android:layout_marginBottom="12dp" />
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="5"
-                android:orientation="vertical"
-                android:layout_gravity="end"
-                android:padding="5dp">
-                <Button
-                    android:id="@+id/btnCrearPremio"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#1F37BF"
-                    android:layout_gravity="left"
-                    android:text="Crear Premio" />
-            </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 

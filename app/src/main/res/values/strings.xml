@@ -66,5 +66,10 @@
     <string name="etiqueta3">Discos Fuentes</string>
     <string name="etiqueta4">Elektra</string>
     <string name="etiqueta5">Fania Records</string>
+    <string name="hint_prize_nombre">Ingrese el nombre</string>
+    <string name="hint_prize_descripcion">Ingrese la descripción</string>
+    <string name="hint_prize_organizacion">Ingrese la organización</string>
+    <string name="label_btn_crear">Crear</string>
+    <string name="label_btn_cancelar">Cancelar</string>
 
 </resources>

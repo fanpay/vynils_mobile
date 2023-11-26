@@ -17,17 +17,23 @@
             android:id="@+id/editTextName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ingrese el nombre" />
+            android:minHeight="48dp"
+            android:inputType="text"
+            android:hint="@string/hint_prize_nombre"/>
         <EditText
             android:id="@+id/editTextDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ingrese la descripción" />
+            android:minHeight="48dp"
+            android:inputType="text"
+            android:hint="@string/hint_prize_descripcion" />
         <EditText
             android:id="@+id/editTextOrganization"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ingrese la organización" />
+            android:minHeight="48dp"
+            android:inputType="text"
+            android:hint="@string/hint_prize_organizacion" />
 
     </LinearLayout>
 
@@ -49,14 +55,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Crear" />
+            android:text="@string/label_btn_crear" />
 
         <Button
             android:id="@+id/buttonCancelPrize"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cancelar"
+            android:text="@string/label_btn_cancelar"
             android:layout_marginStart="16dp"/>
     </LinearLayout>
 
