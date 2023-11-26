@@ -63,6 +63,9 @@
         <action
             android:id="@+id/action_collectorFragment_to_collectorDetailFragment"
             app:destination="@id/collectorDetailFragment" />
+        <action
+            android:id="@+id/action_collectorsFragment_to_prizeCreateFragment"
+            app:destination="@id/prizeCreateFragment" />
     </fragment>
     <fragment
         android:id="@+id/collectorDetailFragment"
@@ -86,4 +89,13 @@
             app:destination="@id/albumDetailFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/prizeCreateFragment"
+        android:name="com.uniandes.vynilsmobile.view.PrizeCreateFragment"
+        android:label="prize_create_fragment"
+        tools:layout="@layout/prize_create_fragment" >
+        <action
+            android:id="@+id/action_prizeCreateFragment_to_collectorsFragment"
+            app:destination="@id/collectorsFragment" />
+    </fragment>
 </navigation>

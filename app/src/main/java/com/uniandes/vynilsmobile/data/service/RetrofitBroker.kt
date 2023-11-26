@@ -4,6 +4,7 @@ import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.data.model.Artist
 import com.uniandes.vynilsmobile.data.model.Collector
 import com.uniandes.vynilsmobile.data.model.Comment
+import com.uniandes.vynilsmobile.data.model.Prize
 
 class RetrofitBroker {
 
@@ -19,7 +20,7 @@ class RetrofitBroker {
                 if (response.isSuccessful) {
                     onComplete(response.body() ?: emptyList())
                 } else {
-                    onError(Exception("getAlbums -> Error en la solicitud a la API: ${response.code()}"))
+                    onError(Exception("getAlbums -> Error en la solicitud a la API: ${response.code()} - ${response.raw()} - ${response.body()}"))
                 }
             } catch (e: Throwable) {
                 onError(e)
@@ -34,7 +35,7 @@ class RetrofitBroker {
                 if (response.isSuccessful) {
                     response.body()?.let { onComplete(it) }
                 } else {
-                    onError(Exception("createAlbum -> Error en la solicitud a la API: ${response.code()}"))
+                    onError(Exception("createAlbum -> Error en la solicitud a la API: ${response.code()} - ${response.raw()} - ${response.body()}"))
                 }
             } catch (e: Throwable) {
                 onError(e)
@@ -51,7 +52,7 @@ class RetrofitBroker {
                 if (response.isSuccessful) {
                     onComplete(response.body() ?: emptyList())
                 } else {
-                    onError(Exception("Error en la solicitud a la API: ${response.code()}"))
+                    onError(Exception("Error en la solicitud a la API: ${response.code()} - ${response.raw()} - ${response.body()}"))
                 }
             } catch (e: Throwable) {
                 onError(e)
@@ -68,7 +69,23 @@ class RetrofitBroker {
                 if (response.isSuccessful) {
                     onComplete(response.body() ?: emptyList())
                 } else {
-                    onError(Exception("getCollectors -> Error en la solicitud a la API: ${response.code()}"))
+                    onError(Exception("getCollectors -> Error en la solicitud a la API: ${response.code()} - ${response.raw()} - ${response.body()}"))
+                }
+            } catch (e: Throwable) {
+                onError(e)
+            }
+        }
+
+        // Prizes
+        suspend fun createPrize(prize: Prize,
+                                onComplete: (resp: Prize) -> Unit,
+                                onError: (error: Throwable) -> Unit) {
+            try {
+                val response = ApiClient.prizes.createPrize(prize)
+                if (response.isSuccessful) {
+                    response.body()?.let { onComplete(it) }
+                } else {
+                    onError(Exception("createPrize -> Error en la solicitud a la API: ${response.code()} - ${response.raw()} - ${response.body()}"))
                 }
             } catch (e: Throwable) {
                 onError(e)
