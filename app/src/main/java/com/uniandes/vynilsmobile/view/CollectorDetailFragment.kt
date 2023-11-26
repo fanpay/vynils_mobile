@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.databinding.CollectorDetailFragmentBinding
@@ -33,13 +32,6 @@ class CollectorDetailFragment : Fragment() {
         binding.collectorName.text = args.collector.name
         binding.tvTelephone.text = args.collector.telephone
         binding.tvEmail.text = args.collector.email
-
-        // Configuración del clic del botón "Comentar"
-        binding.btnCrearPremio.setOnClickListener {
-            // Aquí debes navegar al fragmento de comentarios
-            val action = CollectorDetailFragmentDirections.actionCollectorDetailFragmentToPrizeCreateFragment(args.collector)
-            findNavController().navigate(action)
-        }
     }
 
     override fun onDestroyView() {

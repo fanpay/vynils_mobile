@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.data.model.Prize
 import com.uniandes.vynilsmobile.databinding.PrizeCreateFragmentBinding
@@ -91,9 +90,9 @@ class PrizeCreateFragment : Fragment() {
             Log.v("PrizeCreateFragment", "Prize created successfully. ID-> ${prize.id}")
             Toast.makeText(activity, "Se ha creado el premio exitosamente", Toast.LENGTH_LONG).show()
 
-            val args: PrizeCreateFragmentArgs by navArgs()
-            val action = PrizeCreateFragmentDirections.actionPrizeCreateFragmentToCollectorDetailFragment(args.collector)
-            findNavController().navigate(action)
+            findNavController().popBackStack()
+            /*val action = PrizeCreateFragmentDirections.actionPrizeCreateFragmentToCollectorsFragment()
+            findNavController().navigate(action)*/
         }
 
         viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->

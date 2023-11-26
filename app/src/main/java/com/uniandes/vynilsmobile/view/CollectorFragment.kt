@@ -52,7 +52,6 @@ class CollectorFragment : Fragment(R.layout.collector_fragment) {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         val onItemClick: (Collector) -> Unit = {collector ->
-            //findNavController().popBackStack()
             val action = CollectorFragmentDirections.actionCollectorFragmentToCollectorDetailFragment(collector)
             findNavController().navigate(action)
 
@@ -60,6 +59,12 @@ class CollectorFragment : Fragment(R.layout.collector_fragment) {
 
         collectorAdapter = CollectorsAdapter(progressBar, onItemClick)
         recyclerView.adapter = collectorAdapter
+
+        val fab: View = binding.floatingAddPrize
+        fab.setOnClickListener { _ ->
+            val action = CollectorFragmentDirections.actionCollectorsFragmentToPrizeCreateFragment()
+            findNavController().navigate(action)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
