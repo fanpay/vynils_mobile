@@ -9,6 +9,7 @@
     <string name="error_network_connection">Error de comunicación</string>
     <string name="error_retrieve_albums">Error obteniendo álbumes</string>
     <string name="error_save_album">Error creando álbum</string>
+    <string name="error_save_comment">Error creando comentario</string>
     <string name="error_retrieve_collectors">Error obteniendo colectores</string>
     <string name="not_data_found">No se encontraron datos</string>
     <string name="txt_no_comments">No hay comentarios para este álbum</string>
@@ -64,12 +65,20 @@
     <string name="etiqueta1">Sony Music</string>
     <string name="etiqueta2">EMI</string>
     <string name="etiqueta3">Discos Fuentes</string>
-    <string name="etiqueta4">Elektra</string>
+    <string name="etiqueta4">Elektra</string>s
     <string name="etiqueta5">Fania Records</string>
     <string name="hint_prize_nombre">Ingrese el nombre</string>
     <string name="hint_prize_descripcion">Ingrese la descripción</string>
     <string name="hint_prize_organizacion">Ingrese la organización</string>
     <string name="label_btn_crear">Crear</string>
     <string name="label_btn_cancelar">Cancelar</string>
+
+    <!-- Comentario -->
+    <string name="commentAlbumButton">Comentar</string>
+    <string name="createAlbumCommentTitle">Crear comentario</string>
+    <string name="albumCommentRating">Calificación</string>
+    <string name="albumCommentDescription">Descripción del comentario</string>
+    <string name="createAlbumCommentButton">Crear</string>
+    <string name="cancelCreateAlbumCommentButton">Cancelar</string>
 
 </resources>
