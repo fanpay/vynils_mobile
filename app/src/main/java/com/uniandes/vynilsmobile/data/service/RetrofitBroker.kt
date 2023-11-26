@@ -3,6 +3,7 @@ package com.uniandes.vynilsmobile.data.service
 import com.uniandes.vynilsmobile.data.model.Album
 import com.uniandes.vynilsmobile.data.model.Artist
 import com.uniandes.vynilsmobile.data.model.Collector
+import com.uniandes.vynilsmobile.data.model.Comment
 
 class RetrofitBroker {
 
@@ -71,8 +72,23 @@ class RetrofitBroker {
                 }
             } catch (e: Throwable) {
                 onError(e)
+        // Comentarios
+        suspend fun addComment(comment: Comment,
+             onComplete: (resp: Comment) -> Unit,
+             onError: (error: Throwable) -> Unit) {
+             try {
+                 val response = ApiClient.comments.addComment(comment)
+                 if (response.isSuccessful) {
+                     response.body()?.let { onComplete(it) }
+                 } else {
+                     onError(Exception("addComment -> Error en la solicitud a la API: ${response.code()}"))
+                 }
+             } catch (e: Throwable) {
+                 onError(e)
+
+                    }
+                }
             }
         }
     }
-
 }

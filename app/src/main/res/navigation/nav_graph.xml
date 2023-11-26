@@ -70,4 +70,16 @@
             android:name="collector"
             app:argType="com.uniandes.vynilsmobile.data.model.Collector" />
     </fragment>
+    <fragment
+        android:id="@+id/commentCreateFragment"
+        android:name="com.uniandes.vynilsmobile.view.CommentCreateFragment"
+        android:label="Comentar"
+        tools:layout="@layout/fragment_comment_create" />
+
+    <action
+        android:id="@+id/action_albumDetailFragment_to_commentCreateFragment"
+        app:destination="@id/commentCreateFragment" />
+
+
+
 </navigation>

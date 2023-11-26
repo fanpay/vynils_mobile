@@ -22,4 +22,9 @@ object ApiClient {
     }
 
     val collectors: CollectorApi = retrofit.create(CollectorApi::class.java)
+
+    val comments: CommentApi by lazy {
+        retrofit.create(CommentApi::class.java)
+    }
+
 }

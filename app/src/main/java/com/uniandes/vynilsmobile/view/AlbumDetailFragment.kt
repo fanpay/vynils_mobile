@@ -12,6 +12,8 @@ import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.databinding.AlbumDetailFragmentBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
+import androidx.navigation.fragment.findNavController
+
 
 class AlbumDetailFragment : Fragment() {
     private var _binding: AlbumDetailFragmentBinding? = null
@@ -55,6 +57,13 @@ class AlbumDetailFragment : Fragment() {
         }
 
         binding.tvGenre.text = args.album.genre
+
+        // Configuración del clic del botón "Comentar"
+        binding.commentButton.setOnClickListener {
+            // Aquí debes navegar al fragmento de comentarios
+            val action = AlbumDetailFragmentDirections.actionAlbumDetailFragmentToCommentCreateFragment()
+            findNavController().navigate(action)
+        }
     }
 
     override fun onDestroyView() {
