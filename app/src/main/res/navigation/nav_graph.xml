@@ -69,5 +69,20 @@
         <argument
             android:name="collector"
             app:argType="com.uniandes.vynilsmobile.data.model.Collector" />
+        <action
+            android:id="@+id/action_collectorDetailFragment_to_prizeCreateFragment"
+            app:destination="@id/prizeCreateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/prizeCreateFragment"
+        android:name="com.uniandes.vynilsmobile.view.PrizeCreateFragment"
+        android:label="prize_create_fragment"
+        tools:layout="@layout/prize_create_fragment" >
+        <argument
+            android:name="collector"
+            app:argType="com.uniandes.vynilsmobile.data.model.Collector" />
+        <action
+            android:id="@+id/action_prizeCreateFragment_to_collectorDetailFragment"
+            app:destination="@id/collectorDetailFragment" />
     </fragment>
 </navigation>

@@ -32,6 +32,7 @@
     <string name="title_albums_bnb">Álbumes</string>
     <string name="title_artists_bnb">Artistas</string>
     <string name="title_collectors_bnb">Coleccionistas</string>
+    <string name="title_create_prize">Crear premio</string>
   
     <string name="description_label">Descripción</string>
     <string name="launch_date">Fecha de lanzamiento</string>
