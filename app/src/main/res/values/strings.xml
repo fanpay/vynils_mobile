@@ -32,6 +32,7 @@
     <string name="title_albums_bnb">Álbumes</string>
     <string name="title_artists_bnb">Artistas</string>
     <string name="title_collectors_bnb">Coleccionistas</string>
+    <string name="title_create_prize">Crear premio</string>
   
     <string name="description_label">Descripción</string>
     <string name="launch_date">Fecha de lanzamiento</string>
@@ -50,6 +51,7 @@
     <string name="genero_desc">Ingrese el género musical</string>
     <string name="crear_button">Crear</string>
     <string name="agregar_album">Agregar álbum</string>
+    <string name="agregar_premio">Agregar premio</string>
     <string name="crear_album_title">Crear Álbum</string>
     <string name="telephone">Teléfono</string>
     <string name="email">Email</string>
@@ -64,5 +66,10 @@
     <string name="etiqueta3">Discos Fuentes</string>
     <string name="etiqueta4">Elektra</string>
     <string name="etiqueta5">Fania Records</string>
+    <string name="hint_prize_nombre">Ingrese el nombre</string>
+    <string name="hint_prize_descripcion">Ingrese la descripción</string>
+    <string name="hint_prize_organizacion">Ingrese la organización</string>
+    <string name="label_btn_crear">Crear</string>
+    <string name="label_btn_cancelar">Cancelar</string>
 
 </resources>
