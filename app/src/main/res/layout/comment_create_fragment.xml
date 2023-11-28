@@ -18,14 +18,14 @@
             android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ingrese el Rating" />
+            android:hint="@string/hint_comment_rating" />
 
         <EditText
             android:id="@+id/editTextComment"
             android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ingrese el comentario" />
+            android:hint="@string/hint_comment_text" />
 
     </LinearLayout>
 
@@ -47,14 +47,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Crear" />
+            android:text="@string/label_btn_crear" />
 
         <Button
             android:id="@+id/buttonCancelComment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cancelar"
+            android:text="@string/label_btn_cancelar"
             android:layout_marginStart="16dp"/>
     </LinearLayout>
 

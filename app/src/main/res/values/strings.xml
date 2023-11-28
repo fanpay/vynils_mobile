@@ -67,6 +67,7 @@
     <string name="etiqueta3">Discos Fuentes</string>
     <string name="etiqueta4">Elektra</string>s
     <string name="etiqueta5">Fania Records</string>
+
     <string name="hint_prize_nombre">Ingrese el nombre</string>
     <string name="hint_prize_descripcion">Ingrese la descripción</string>
     <string name="hint_prize_organizacion">Ingrese la organización</string>
@@ -77,5 +78,8 @@
     <string name="commentAlbumButton">Comentar</string>
     <string name="createAlbumCommentTitle">Crear comentario</string>
     <string name="language">Idioma</string>
+
+    <string name="hint_comment_rating">Ingrese el rating</string>
+    <string name="hint_comment_text">Ingrese el comentario</string>
 
 </resources>
