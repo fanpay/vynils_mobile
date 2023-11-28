@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Vynils Mobile</string>
+    <string name="app_name">Vinilos para móviles</string>
 
     <!-- DATE FORMATS -->
-    <string name="date_format">%d-%02d-%02d</string>
+    <string name="date_format" translatable="false">%d-%02d-%02d</string>
 
     <!-- ERROR MESSAGES -->
     <string name="error_image_description">Imagen de error, el sistema Android tiene un problema</string>
@@ -61,7 +61,7 @@
     <string name="genero1">Salsa</string>
     <string name="genero2">Rock</string>
     <string name="genero3">Folk</string>
-    <string name="genero4">Classical</string>
+    <string name="genero4">Clásica</string>
     <string name="etiqueta1">Sony Music</string>
     <string name="etiqueta2">EMI</string>
     <string name="etiqueta3">Discos Fuentes</string>
@@ -76,9 +76,6 @@
     <!-- Comentario -->
     <string name="commentAlbumButton">Comentar</string>
     <string name="createAlbumCommentTitle">Crear comentario</string>
-    <string name="albumCommentRating">Calificación</string>
-    <string name="albumCommentDescription">Descripción del comentario</string>
-    <string name="createAlbumCommentButton">Crear</string>
-    <string name="cancelCreateAlbumCommentButton">Cancelar</string>
+    <string name="language">Idioma</string>
 
 </resources>

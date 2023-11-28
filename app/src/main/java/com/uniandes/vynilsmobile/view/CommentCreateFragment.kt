@@ -73,8 +73,7 @@ class CommentCreateFragment : Fragment() {
         viewModel.comment.observe(viewLifecycleOwner) { comment ->
             Log.v("CommentCreateFragment", "Comment created successfully. AlbumID->${idAlbum}  ID-> ${comment.id}")
             Toast.makeText(activity, "Se ha creado el comentario exitosamente", Toast.LENGTH_LONG).show()
-            val action = CommentCreateFragmentDirections.actionCommentCreateFragmentToAlbumDetailFragment(args.album)
-            findNavController().navigate(action)
+            findNavController().popBackStack()
         }
 
         viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->
