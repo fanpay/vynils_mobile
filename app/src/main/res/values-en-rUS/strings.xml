@@ -63,4 +63,6 @@
     <string name="commentAlbumButton">Comment</string>
     <string name="createAlbumCommentTitle">Create comment</string>
     <string name="language">Language</string>
+    <string name="hint_comment_rating">Enter the rating</string>
+    <string name="hint_comment_text">Enter the comment</string>
 </resources>
