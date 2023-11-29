@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.AlbumCreateFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/labelNombreAlbum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="0dp"
+                android:textStyle="bold"
+                android:text="@string/nombre_label" />
+            <EditText
+                android:id="@+id/editNombreAlbum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:inputType="text"
+                android:hint="@string/nombre_desc"
+                android:autofillHints="nombre"
+                android:minHeight="48dp"/>
+
+            <TextView
+                android:id="@+id/descriptionLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="0dp"
+                android:textStyle="bold"
+                android:text="@string/description_label" />
+            <EditText
+                android:id="@+id/editDescripcionAlbum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:maxLength="300"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                android:hint="@string/descripcion_desc"
+                android:autofillHints="description"
+                android:minHeight="248dp"/>
+
+            <TextView
+                android:id="@+id/coverLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="0dp"
+                android:textStyle="bold"
+                android:text="@string/cover_label" />
+
+            <EditText
+                android:id="@+id/editCoverAlbum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:inputType="text"
+                android:hint="@string/cover_desc"
+                android:autofillHints="nombre"
+                android:minHeight="48dp"/>
+
+            <TextView
+                android:id="@+id/fechaEstrenoLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="0dp"
+                android:textStyle="bold"
+                android:text="@string/fecha_estreno_label" />
+            <EditText
+                android:id="@+id/editFechaEstrenoAlbum"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textSize="17sp"
+                android:inputType="none"
+                android:focusable="false"
+                android:hint="@string/fecha_estreno_desc"
+                android:autofillHints="fecha estreno"
+                android:minHeight="48dp"/>
+
+            <TextView
+                android:id="@+id/generoLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="0dp"
+                android:textStyle="bold"
+                android:text="@string/genero_label" />
+
+            <Spinner
+                android:id="@+id/albumGeneros"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/generos"
+                android:prompt="@string/genero_desc"
+                android:textSize="24sp"
+                android:minHeight="58dp"/>
+
+            <TextView
+                android:id="@+id/disqueraLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="0dp"
+                android:textStyle="bold"
+                android:text="@string/disquera_label" />
+
+            <Spinner
+                android:id="@+id/etiquetasGrabaciones"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/etiquetasGrabacion"
+                android:prompt="@string/disquera_label"
+                android:textSize="24sp"
+                android:minHeight="58dp"/>
+
+            <Button
+                android:id="@+id/btnCrearAlbum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="0dp"
+                android:text="@string/crear_button" />
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

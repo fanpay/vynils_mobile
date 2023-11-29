@@ -1,15 +1,19 @@
 package com.uniandes.vynilsmobile.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.squareup.picasso.Picasso
 import com.uniandes.vynilsmobile.R
 import com.uniandes.vynilsmobile.databinding.AlbumDetailFragmentBinding
+import java.text.SimpleDateFormat
+import java.util.Locale
+import androidx.navigation.fragment.findNavController
+
 
 class AlbumDetailFragment : Fragment() {
     private var _binding: AlbumDetailFragmentBinding? = null
@@ -37,8 +41,28 @@ class AlbumDetailFragment : Fragment() {
             .into(binding.albumImage)
 
         binding.tvDescription.text = args.album.description
-        binding.tvReleaseDate.text = args.album.releaseDate
+
+        // Formatear la fecha
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
+
+        try {
+            val date = inputFormat.parse(args.album.releaseDate)
+            val albumDateForUI = outputFormat.format(date)
+            binding.tvReleaseDate.text = albumDateForUI
+        } catch (e: Exception) {
+            e.printStackTrace()
+            binding.tvReleaseDate.text = args.album.releaseDate
+        }
+
         binding.tvGenre.text = args.album.genre
+
+        // Configuración del clic del botón "Comentar"
+        binding.commentButton.setOnClickListener {
+            // Aquí debes navegar al fragmento de comentarios
+            val action = AlbumDetailFragmentDirections.actionAlbumDetailFragmentToCommentCreateFragment(args.album)
+            findNavController().navigate(action)
+        }
     }
 
     override fun onDestroyView() {

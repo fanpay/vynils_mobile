@@ -44,9 +44,6 @@ class ArtistFragment : Fragment(R.layout.artist_fragment) {
     ): View {
         _binding = ArtistFragmentBinding.inflate(inflater, container, false)
 
-        val bar = (activity as AppCompatActivity).supportActionBar
-        bar?.title = getString(R.string.title_artists)
-
         progressBar = binding.progressBar
         return binding.root
     }
@@ -73,15 +70,25 @@ class ArtistFragment : Fragment(R.layout.artist_fragment) {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        activity.actionBar?.title = getString(R.string.title_artists)
+
+        val bar = (activity as AppCompatActivity).supportActionBar
+        bar?.title = getString(R.string.title_vista_artists)
+
         viewModel = ViewModelProvider(this, ArtistViewModel.Factory(activity.application))[ArtistViewModel::class.java]
         viewModel.artists.observe(viewLifecycleOwner) { artists ->
             artistAdapter?.artists = artists
         }
+
+        viewModel.eventNotDataFound.observe(viewLifecycleOwner) { isNotDataFoundShown ->
+            if (isNotDataFoundShown) notDataFound()
+            else  mainActivity.showErrorLayout(false, "")
+        }
+
         viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->
             if (isNetworkError) onNetworkError()
             else  mainActivity.showErrorLayout(false, "")
         }
+
 
     }
     override fun onDestroyView() {
@@ -90,10 +97,30 @@ class ArtistFragment : Fragment(R.layout.artist_fragment) {
     }
 
     private fun onNetworkError() {
-       if(!viewModel.isNetworkErrorShown.value!!) {
-            Toast.makeText(activity, resources.getString(R.string.error_network_connection), Toast.LENGTH_LONG).show()
+        if(!viewModel.isNetworkErrorShown.value!!) {
+            Toast.makeText(
+                activity,
+                resources.getString(R.string.error_network_connection),
+                Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
-            mainActivity.showErrorLayout(true, resources.getString(R.string.error_network_connection))
+            mainActivity.showErrorLayout(
+                true,
+                resources.getString(R.string.error_network_connection)
+            )
+        }
+    }
+    private fun notDataFound() {
+        if(!viewModel.isNotDataFoundShown.value!!) {
+            Toast.makeText(
+                activity,
+                resources.getString(R.string.not_data_found),
+                Toast.LENGTH_LONG
+            ).show()
+            viewModel.onNotDataFoundShown()
+            mainActivity.showNotDataFoundLayout(
+                true,
+                resources.getString(R.string.not_data_found)
+            )
         }
     }
 }

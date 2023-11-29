@@ -21,5 +21,16 @@ object ApiClient {
         retrofit.create(ArtistApi::class.java)
     }
 
-    val collectors: CollectorApi = retrofit.create(CollectorApi::class.java)
+    val comments: CommentApi by lazy {
+        retrofit.create(CommentApi::class.java)
+    }
+
+    val collectors: CollectorApi by lazy {
+        retrofit.create(CollectorApi::class.java)
+    }
+
+    val prizes: PrizeApi by lazy {
+        retrofit.create(PrizeApi::class.java)
+    }
+
 }

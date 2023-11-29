@@ -11,11 +11,15 @@ import static androidx.test.espresso.matcher.ViewMatchers.isSelected;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import static com.uniandes.vynilsmobile.utils.LocaleUtils.LANG_ES;
+
+import android.content.Context;
 import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.ViewAssertion;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -23,12 +27,14 @@ import androidx.test.filters.LargeTest;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 
 import com.uniandes.vynilsmobile.R;
+import com.uniandes.vynilsmobile.utils.LocaleUtils;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,9 +46,19 @@ public class TestMainActivity{
     @Rule
     public ActivityScenarioRule<MainActivity> mActivityTestRule = new ActivityScenarioRule<>(MainActivity.class);
 
+    @Before
+    public void setUp() {
+        mActivityTestRule.getScenario().onActivity(activity -> {
+            activity.getSupportFragmentManager().beginTransaction();
+        });
+
+        Context context = ApplicationProvider.getApplicationContext();
+        LocaleUtils.setLocale(context, LANG_ES);
+    }
+
     @Test
     public void testToolbarTitle() {
-        String expectedTitle = getApplicationContext().getResources().getString(R.string.title_albums);
+        String expectedTitle = getApplicationContext().getResources().getString(R.string.title_vista_albums);
         onView(withId(R.id.my_toolbar)).check(matches(isDisplayed()));
         onView(isAssignableFrom(Toolbar.class))
                 .check(matches(withToolbarTitle(expectedTitle)));

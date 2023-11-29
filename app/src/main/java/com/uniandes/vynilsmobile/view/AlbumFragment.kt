@@ -60,13 +60,18 @@ class AlbumFragment : Fragment(R.layout.album_fragment) {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         val onItemClick: (Album) -> Unit = { album ->
-            //findNavController().popBackStack()
             val action = AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(album)
             findNavController().navigate(action)
         }
 
         albumAdapter = AlbumsAdapter(progressBar, onItemClick)
         recyclerView.adapter = albumAdapter
+
+        val fab: View = binding.floatingAddAlbum
+        fab.setOnClickListener { _ ->
+            val action = AlbumFragmentDirections.actionAlbumFragmentToAlbumCreateFragment()
+            findNavController().navigate(action)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -76,7 +81,7 @@ class AlbumFragment : Fragment(R.layout.album_fragment) {
         }
 
         val bar = (activity as AppCompatActivity).supportActionBar
-        bar?.title = getString(R.string.title_albums)
+        bar?.title = getString(R.string.title_vista_albums)
 
         viewModel = ViewModelProvider(this, AlbumViewModel.Factory(activity.application))[AlbumViewModel::class.java]
         viewModel.albums.observe(viewLifecycleOwner) { albums ->

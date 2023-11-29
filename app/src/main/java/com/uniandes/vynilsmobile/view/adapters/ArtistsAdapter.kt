@@ -48,6 +48,7 @@ class ArtistsAdapter(private val progressBar: ProgressBar, private val onItemCli
         }
 
         progressBar.visibility = if(itemCount > 0) View.GONE else View.VISIBLE
+
     }
 
     override fun getItemCount(): Int {
@@ -65,7 +66,9 @@ class ArtistsAdapter(private val progressBar: ProgressBar, private val onItemCli
         fun bind(artist: Artist) {
             Picasso.get()
                 .load(artist.image.toUri().buildUpon().scheme("https").build())
-                .placeholder(R.drawable.ic_baseline_album_24)
+
+                .placeholder(R.drawable.ic_baseline_person_24)
+
                 .error(R.drawable.ic_baseline_android_24)
                 .fit()
                 .centerCrop()
@@ -97,6 +100,7 @@ class ArtistsAdapter(private val progressBar: ProgressBar, private val onItemCli
                     }
                 })
         }
+
     }
     private class ArtistDiffCallback : DiffUtil.ItemCallback<Artist>() {
         override fun areItemsTheSame(oldItem: Artist, newItem: Artist): Boolean {

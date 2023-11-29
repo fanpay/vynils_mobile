@@ -15,7 +15,7 @@ Puede encontrar más información sobre el proyecto en la wiki
 6. Ejecutar la aplicación mediante alguna de las siguientes formas:
     1. **Ejecución en un celular:** Descargue en su celular el archivo `app-debug.apk` e instálelo . Una vez instalado, asegurese de tener conexión a internet para ejecutar la aplicación. Puede encontrar el archivo en las siguientes ubicaciones:
         1. En el repositorio: `release_apk/app-debug.apk`
-        2. El el siguiente enlace: [app-debug.apk](https://uniandes-my.sharepoint.com/:u:/g/personal/s_mascareno_uniandes_edu_co/EfqFKl-FAmdBsmOJReq5iyMBHjcFXk840NbqWDzYt4AV4A?e=pcZF17)
+        2. El el siguiente enlace: [app-debug.apk](https://uniandes-my.sharepoint.com/:u:/g/personal/s_mascareno_uniandes_edu_co/EVVaMd5j52lPjjJ5ukNRB_gBJITBoUrC1SHpq5Z3Lsh7oA?e=dQ23U8)
     2. **Ejecución en el emulador de Android Studio:** Puede ejecutar la aplicación desde un emulador Android desde Android Studio. Solo debe crearlo, seleccionarlo y ejecutarlo.
        * [Instrucciones](https://developer.android.com/studio/install?hl=es-419)
     4. **Emulación de la aplicación en un celular:** Puede usar su dispositivo Android como emulador y ejecutar la aplicación desde su máquina.

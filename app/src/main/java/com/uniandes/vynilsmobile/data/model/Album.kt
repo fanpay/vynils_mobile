@@ -7,7 +7,7 @@ import java.io.Serializable
 @Entity(tableName = "albums_table")
 data class Album (
     @PrimaryKey
-    val id:Int,
+    val id:Int? = null,
     val name:String,
     val cover:String,
     val releaseDate:String,

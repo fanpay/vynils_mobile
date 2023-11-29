@@ -5,19 +5,23 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.uniandes.vynilsmobile.data.model.Album
+import com.uniandes.vynilsmobile.data.model.Artist
 import com.uniandes.vynilsmobile.data.model.Collector
 import com.uniandes.vynilsmobile.data.model.Comment
+import com.uniandes.vynilsmobile.data.model.Prize
 
 
 @Database(
-    entities = [Album::class, Collector::class, Comment::class],
-    version = 1,
+    entities = [Album::class, Artist::class, Collector::class, Comment::class, Prize::class],
+    version = 2,
     exportSchema = false
 )
 abstract class VinylRoomDatabase : RoomDatabase() {
     abstract fun albumsDao(): AlbumsDao
+    abstract fun artistsDao(): ArtistsDao
     abstract fun collectorsDao(): CollectorsDao
     abstract fun commentsDao(): CommentsDao
+    abstract fun prizesDao(): PrizesDao
 
     companion object {
         @Volatile

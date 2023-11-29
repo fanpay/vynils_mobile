@@ -37,7 +37,8 @@
                 <ImageView
                     android:id="@+id/albumImage"
                     android:layout_width="250dp"
-                    android:layout_height="250dp" />
+                    android:layout_height="250dp"
+                    android:contentDescription="@string/album_cover_image_alt"/>
 
             </LinearLayout>
 
@@ -54,7 +55,7 @@
                     android:textSize="25sp"
                     android:layout_marginBottom="12dp"
                     android:textStyle="bold"
-                    android:text="@string/description" />
+                    android:text="@string/description_label" />
 
                 <TextView
                     android:id="@+id/tvDescription"
@@ -101,6 +102,22 @@
                     android:textSize="18sp"
                     android:layout_marginBottom="12dp" />
 
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="5"
+                android:orientation="vertical"
+                android:layout_gravity="end"
+                android:padding="5dp">
+                <Button
+                    android:id="@+id/commentButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#1F37BF"
+                    android:layout_gravity="start"
+                    android:text="@string/commentAlbumButton" />
             </LinearLayout>
 
         </LinearLayout>

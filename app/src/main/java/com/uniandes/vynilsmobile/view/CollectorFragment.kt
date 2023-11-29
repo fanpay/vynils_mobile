@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.uniandes.vynilsmobile.R
@@ -50,12 +51,20 @@ class CollectorFragment : Fragment(R.layout.collector_fragment) {
         recyclerView = binding.collectorsRv
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        val onItemClick: (Collector) -> Unit = {
+        val onItemClick: (Collector) -> Unit = {collector ->
+            val action = CollectorFragmentDirections.actionCollectorFragmentToCollectorDetailFragment(collector)
+            findNavController().navigate(action)
 
         }
 
         collectorAdapter = CollectorsAdapter(progressBar, onItemClick)
         recyclerView.adapter = collectorAdapter
+
+        val fab: View = binding.floatingAddPrize
+        fab.setOnClickListener { _ ->
+            val action = CollectorFragmentDirections.actionCollectorsFragmentToPrizeCreateFragment()
+            findNavController().navigate(action)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -65,9 +74,8 @@ class CollectorFragment : Fragment(R.layout.collector_fragment) {
         }
 
         val bar = (activity as AppCompatActivity).supportActionBar
-        bar?.title = getString(R.string.title_collectors)
+        bar?.title = getString(R.string.title_vista_collectors)
 
-        activity.actionBar?.title = getString(R.string.title_collectors)
         viewModel = ViewModelProvider(this, CollectorViewModel.Factory(activity.application))[CollectorViewModel::class.java]
         viewModel.collectors.observe(viewLifecycleOwner) { collectors ->
             collectorAdapter?.collectors = collectors
