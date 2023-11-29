@@ -109,14 +109,14 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="5"
                 android:orientation="vertical"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:padding="5dp">
                 <Button
                     android:id="@+id/commentButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#1F37BF"
-                    android:layout_gravity="left"
+                    android:layout_gravity="start"
                     android:text="@string/commentAlbumButton" />
             </LinearLayout>
 

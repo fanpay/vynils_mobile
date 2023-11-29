@@ -18,19 +18,19 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class AlbumCreateFragmentTest {
+class PrizeCreateFragmentTest {
 
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Before
-    fun navigateToAlbumCreateFragmentFromAlbumFragment(){
+    fun navigateToPrizeCreateFragmentFromCollectorFragment(){
         Thread.sleep(Toast.LENGTH_LONG * 2000L)
 
         val bottomNavigationItemView = onView(
             Matchers.allOf(
-                withId(R.id.albumFragment),
-                withContentDescription(R.string.title_albums),
+                withId(R.id.collectorsFragment),
+                withContentDescription(R.string.title_collectors),
                 isDescendantOfA(
                     isDescendantOfA(withId(R.id.bottom_navigation))
                 ),
@@ -43,36 +43,26 @@ class AlbumCreateFragmentTest {
 
         val floatingActionButton = onView(
             Matchers.allOf(
-                withId(R.id.floating_add_album),
+                withId(R.id.floating_add_prize),
                 isDisplayed()
             )
         )
         floatingActionButton.perform(click())
     }
     @Test
-    fun testAlbumCreation() {
+    fun testPrizeCreation() {
         Thread.sleep(Toast.LENGTH_LONG * 2000L)
         // Wait for the fragment to be loaded
-        onView(withId(R.id.editNombreAlbum)).check(matches(isDisplayed()))
+        onView(withId(R.id.editTextName)).check(matches(isDisplayed()))
 
         // Enter album information
-        onView(withId(R.id.editNombreAlbum)).perform(typeText("Test Album"), closeSoftKeyboard())
-        onView(withId(R.id.editDescripcionAlbum)).perform(typeText("Test description"), closeSoftKeyboard())
-        onView(withId(R.id.editCoverAlbum)).perform(typeText("http://example.com/cover.jpg"), closeSoftKeyboard())
-        onView(withId(R.id.editFechaEstrenoAlbum)).perform(click())
+        onView(withId(R.id.editTextName)).perform(typeText("Test Prize"), closeSoftKeyboard())
+        onView(withId(R.id.editTextDescription)).perform(typeText("Test description"), closeSoftKeyboard())
+        onView(withId(R.id.editTextOrganization)).perform(typeText("Test ORG"), closeSoftKeyboard())
 
-        // Simula la selección de una fecha (puedes ajustar según sea necesario)
-        onView(withId(android.R.id.button1)).perform(click())
-        onView(withId(R.id.editFechaEstrenoAlbum)).perform(replaceText("2023-11-28"))
-
-        onView(withId(R.id.albumGeneros)).perform(click())
-        onView(withText("Rock")).perform(click())
-        onView(withId(R.id.etiquetasGrabaciones)).perform(click())
-        onView(withText("EMI")).perform(click())
-
-        onView(withId(R.id.btnCrearAlbum)).perform(scrollTo(), click())
+        onView(withId(R.id.buttonCreatePrize)).perform(click())
 
         Thread.sleep(Toast.LENGTH_LONG * 2000L)
-        onView(withId(R.id.albumFragment)).check(matches(isDisplayed()))
+        onView(withId(R.id.collectorsFragment)).check(matches(isDisplayed()))
     }
 }
