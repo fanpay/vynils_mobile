@@ -85,6 +85,7 @@ class AlbumRepository(val application: Application) {
                         onComplete(response)
                     },
                     onError = { error ->
+                        onError(error)
                         throw ApiRequestException(
                             application.resources.getString(
                                 R.string.error_retrieve_albums

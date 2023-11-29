@@ -31,8 +31,7 @@ class PrizeCreateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val btnCrearPrize: View = binding.buttonCreatePrize
-        btnCrearPrize.setOnClickListener { _ ->
+        binding.buttonCreatePrize.setOnClickListener { _ ->
             val prizeName = binding.editTextName.text.toString()
             val prizeDescription = binding.editTextDescription.text.toString()
             val prizeOrganization = binding.editTextOrganization.text.toString()
@@ -74,6 +73,9 @@ class PrizeCreateFragment : Fragment() {
 
             viewModel.savePrize(prize)
         }
+        binding.buttonCancelPrize.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -91,8 +93,6 @@ class PrizeCreateFragment : Fragment() {
             Toast.makeText(activity, "Se ha creado el premio exitosamente", Toast.LENGTH_LONG).show()
 
             findNavController().popBackStack()
-            /*val action = PrizeCreateFragmentDirections.actionPrizeCreateFragmentToCollectorsFragment()
-            findNavController().navigate(action)*/
         }
 
         viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->

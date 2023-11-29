@@ -34,13 +34,10 @@ class CommentCreateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val buttonCreateComment: View = binding.buttonCreateComment
-        val buttonCancelComment: View = binding.buttonCancelComment
-
         val args: CommentCreateFragmentArgs by navArgs()
         val idAlbum = args.album.id!!
 
-        buttonCreateComment.setOnClickListener {
+        binding.buttonCreateComment.setOnClickListener {
 
             val rating = binding.editTextRating.text.toString().toInt()
             val commentText = binding.editTextComment.text.toString()
@@ -52,7 +49,7 @@ class CommentCreateFragment : Fragment() {
 
             viewModel.addComment(idAlbum, comment)
         }
-        buttonCancelComment.setOnClickListener {
+        binding.buttonCancelComment.setOnClickListener {
             findNavController().popBackStack()
         }
     }
@@ -73,8 +70,7 @@ class CommentCreateFragment : Fragment() {
         viewModel.comment.observe(viewLifecycleOwner) { comment ->
             Log.v("CommentCreateFragment", "Comment created successfully. AlbumID->${idAlbum}  ID-> ${comment.id}")
             Toast.makeText(activity, "Se ha creado el comentario exitosamente", Toast.LENGTH_LONG).show()
-            val action = CommentCreateFragmentDirections.actionCommentCreateFragmentToAlbumDetailFragment(args.album)
-            findNavController().navigate(action)
+            findNavController().popBackStack()
         }
 
         viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->

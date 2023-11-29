@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Vynils Mobile</string>
+    <string name="app_name">Vinilos para móviles</string>
 
     <!-- DATE FORMATS -->
-    <string name="date_format">%d-%02d-%02d</string>
+    <string name="date_format" translatable="false">%d-%02d-%02d</string>
 
     <!-- ERROR MESSAGES -->
     <string name="error_image_description">Imagen de error, el sistema Android tiene un problema</string>
@@ -61,12 +61,13 @@
     <string name="genero1">Salsa</string>
     <string name="genero2">Rock</string>
     <string name="genero3">Folk</string>
-    <string name="genero4">Classical</string>
+    <string name="genero4">Clásica</string>
     <string name="etiqueta1">Sony Music</string>
     <string name="etiqueta2">EMI</string>
     <string name="etiqueta3">Discos Fuentes</string>
     <string name="etiqueta4">Elektra</string>s
     <string name="etiqueta5">Fania Records</string>
+
     <string name="hint_prize_nombre">Ingrese el nombre</string>
     <string name="hint_prize_descripcion">Ingrese la descripción</string>
     <string name="hint_prize_organizacion">Ingrese la organización</string>
@@ -76,9 +77,9 @@
     <!-- Comentario -->
     <string name="commentAlbumButton">Comentar</string>
     <string name="createAlbumCommentTitle">Crear comentario</string>
-    <string name="albumCommentRating">Calificación</string>
-    <string name="albumCommentDescription">Descripción del comentario</string>
-    <string name="createAlbumCommentButton">Crear</string>
-    <string name="cancelCreateAlbumCommentButton">Cancelar</string>
+    <string name="language">Idioma</string>
+
+    <string name="hint_comment_rating">Ingrese el rating</string>
+    <string name="hint_comment_text">Ingrese el comentario</string>
 
 </resources>
